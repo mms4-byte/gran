@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محراب الختمة الملكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Reem+Kufi:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-glow: #f3cf7a;
+            --bg: #030712;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * { transition: all 0.3s ease; }
+
+        body {
+            background: var(--bg);
+            color: #fff;
+            font-family: 'Amiri', serif;
+            margin: 0;
+            padding: 0;
+            background-image: radial-gradient(circle at top right, #1a2a44 0%, #030712 100%);
+            min-height: 100vh;
+        }
+
+        /* الهلال الرمضاني */
+        .ramadan-moon {
+            font-size: 3rem;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold);
+            animation: pulse 3s infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 3px solid var(--gold);
+        }
+
+        h1 {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 3.5rem; /* خط عريض جداً */
+            font-weight: 900;
+            color: var(--gold);
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background: #111;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), #fff, var(--gold));
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 30px;
+            border: 2px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            backdrop-filter: blur(15px);
+        }
+
+        .card.active {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .card h2 {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-top: 0;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.4);
+            margin-top: 15px;
+            padding: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .action-item:hover { border-color: var(--gold); }
+
+        .action-item.done {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .action-item b {
+            font-size: 1.4rem; /* نص عريض */
+            font-weight: 700;
+        }
+
+        .pages-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        .done .pages-badge { background: rgba(0,0,0,0.1); }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* تحسين العرض للجوال */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            main { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-container"><div id="bar"></div></div>
+
+<header>
+    <div class="ramadan-moon">🌙</div>
+    <h1>مِحـرَابُ الخَتـمَة</h1>
+    <div id="date" style="font-size: 1.5rem; font-weight: bold; opacity: 0.8;"></div>
+</header>
+
+<main id="app"></main>
+
+<footer>"اللهم اجعلنا من أهل القرآن"</footer>
+
+<script>
+    const TOKEN = "8457845103:AAFXlTTnoLyTWyGfXsT7hgZrpsVVjkPQWb8";
+    const MY_ID = "ضع_رقم_الايديك_هنا"; // احصل عليه من @userinfobot
+
+    const prayers = [
+        { name: "الفجر", range: "1 - 4" },
+        { name: "الظهر", range: "5 - 8" },
+        { name: "العصر", range: "9 - 12" },
+        { name: "المغرب", range: "13 - 16" },
+        { name: "العشاء", range: "17 - 20" }
+    ];
+
+    function notify(text) {
+        if(MY_ID === "ضع_رقم_الايديك_هنا") return;
+        fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${MY_ID}&text=${encodeURIComponent(text)}`);
+    }
+
+    function draw() {
+        const app = document.getElementById('app');
+        const state = JSON.parse(localStorage.getItem('ramadan_v3') || '{}');
+        const today = new Date().toDateString();
+
+        if (localStorage.getItem('sync_date') !== today) {
+            localStorage.clear();
+            localStorage.setItem('sync_date', today);
+        }
+
+        app.innerHTML = prayers.map((p, i) => {
+            const isPrayerDone = state['p'+i];
+            const isQuranDone = state['q'+i];
+            return `
+                <div class="card ${isPrayerDone && isQuranDone ? 'active' : ''}">
+                    <h2>صلاة ${p.name}</h2>
+                    <div class="action-item ${isPrayerDone ? 'done' : ''}" onclick="toggle(${i}, 'p', '✅ صليت ${p.name}')">
+                        <b>أداء الفريضة</b>
+                        <span>${isPrayerDone ? '✔' : ''}</span>
+                    </div>
+                    <div class="action-item ${isQuranDone ? 'done' : ''}" onclick="toggle(${i}, 'q', '📖 قرأت ورد ${p.name} (ص ${p.range})')">
+                        <div>
+                            <b>قراءة القرآن</b><br>
+                            <span class="pages-badge">صفحة ${p.range}</span>
+                        </div>
+                        <span>${isQuranDone ? '✔' : ''}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        const total = prayers.length * 2;
+        const current = Object.values(state).filter(v => v).length;
+        document.getElementById('bar').style.width = (current/total*100) + '%';
+    }
+
+    function toggle(id, type, msg) {
+        const state = JSON.parse(localStorage.getItem('ramadan_v3') || '{}');
+        const key = type + id;
+        state[key] = !state[key];
+        localStorage.setItem('ramadan_v3', JSON.stringify(state));
+        if(state[key]) notify(msg);
+        draw();
+    }
+
+    document.getElementById('date').innerText = new Date().toLocaleDateString('ar-SA', {weekday: 'long', day: 'numeric', month: 'long'});
+    draw();
+</script>
+
+</body>
+</html>
