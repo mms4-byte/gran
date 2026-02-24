@@ -1,754 +1,185 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#05080f">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>🌙 محراب الختمة الملكي</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700;900&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<style>
-:root {
---gold: #D4AF37; --gold-bright: #FFD700; --gold-dark: #AA8C2C;
---bg-deep: #05080f; --bg-card: rgba(20, 26, 42, 0.8); --bg-card-active: rgba(32, 42, 65, 0.9);
---text-primary: #ffffff; --text-secondary: #cbd5e1; --success: #10b981;
---success-glow: rgba(16, 185, 129, 0.4); --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.25);
---shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.5); --safe-area-bottom: env(safe-area-inset-bottom, 20px);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
-input, textarea { user-select: text !important; -webkit-user-select: text !important; }
-body {
-background: var(--bg-deep); color: var(--text-primary); font-family: 'Amiri', serif; min-height: 100vh;
-padding-bottom: calc(20px + var(--safe-area-bottom));
-background-image: radial-gradient(circle at 15% 25%, rgba(212, 175, 55, 0.08) 0%, transparent 40%), linear-gradient(180deg, #05080f 0%, #0a1120 100%);
-background-attachment: fixed; -webkit-font-smoothing: antialiased;
-}
-.stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-.star { position: absolute; background: #fff; border-radius: 50%; opacity: 0.3; animation: twinkle 3s infinite; }
-@keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
-.ramadan-decoration { position: fixed; top: 15px; left: 15px; font-size: 2rem; color: var(--gold); z-index: 10; filter: drop-shadow(0 0 8px var(--gold)); animation: float 3s ease-in-out infinite; }
-.lantern { position: fixed; bottom: calc(20px + var(--safe-area-bottom)); right: 15px; font-size: 2.5rem; color: var(--gold); z-index: 10; filter: drop-shadow(0 0 8px var(--gold)); opacity: 0.9; animation: float 4s ease-in-out infinite reverse; }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.auth-bar {
-position: sticky; top: 0; background: rgba(5, 8, 15, 0.95); backdrop-filter: blur(15px);
-padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
-z-index: 1001; border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 2px 15px rgba(0,0,0,0.5);
-}
-.auth-bar.hidden { display: none; }
-.user-info { display: flex; align-items: center; gap: 10px; flex: 1; }
-.user-avatar {
-width: 35px; height: 35px; background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-border-radius: 50%; display: flex; align-items: center; justify-content: center;
-font-size: 1.1rem; color: #000; font-weight: 700;
-}
-.user-name { font-family: 'Cairo', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--gold); }
-.user-id-display { font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; }
-.auth-actions { display: flex; gap: 8px; }
-.btn-auth {
-background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: #000;
-border: none; border-radius: 10px; padding: 8px 16px;
-font-family: 'Cairo', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; white-space: nowrap;
-transition: all 0.2s;
-}
-.btn-auth:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
-.btn-auth:active { transform: scale(0.98); }
-.btn-logout { background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.3); }
-.btn-logout:hover { background: rgba(231, 76, 60, 0.3); }
-.progress-container {
-position: sticky; top: 53px; height: 6px; background: rgba(255, 255, 255, 0.08);
-z-index: 1000; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-}
-#bar {
-height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-bright));
-box-shadow: 0 0 15px var(--gold); transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border-radius: 0 4px 4px 0;
-}
-#bar.full {
-background: linear-gradient(90deg, #10b981, #34d399, #10b981);
-box-shadow: 0 0 20px #10b981; animation: pulseGreen 1.5s infinite;
-}
-@keyframes pulseGreen { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
-header {
-text-align: center; padding: 30px 20px 20px; position: relative; z-index: 5;
-background: linear-gradient(to bottom, rgba(5, 8, 15, 0.95), transparent);
-}
-.greeting { font-size: 1.1rem; color: var(--gold); margin-bottom: 5px; font-weight: 400; }
-h1 {
-font-family: 'Reem Kufi', sans-serif; font-size: 2.2rem; font-weight: 700;
-color: var(--gold-bright); margin: 0 0 10px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-}
-#date { font-size: 1rem; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; gap: 6px; }
-#date i { color: var(--gold); }
-.ramadan-day-badge {
-display: inline-block; background: rgba(212, 175, 55, 0.15); color: var(--gold-bright);
-padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 700;
-margin-top: 10px; border: 1px solid rgba(212, 175, 55, 0.3); animation: pulseGold 2s infinite;
-}
-@keyframes pulseGold { 0%, 100% { box-shadow: 0 0 0 rgba(212, 175, 55, 0.4); } 50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); } }
-main {
-display: grid; grid-template-columns: 1fr; gap: 15px; padding: 15px;
-max-width: 600px; margin: 0 auto; position: relative; z-index: 5;
-}
-.card {
-background: var(--bg-card); border-radius: 20px; padding: 20px;
-border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px);
-position: relative; overflow: hidden; box-shadow: var(--shadow-soft); transition: transform 0.2s, border-color 0.2s;
-}
-.card:active { transform: scale(0.98); }
-.card.active {
-border-color: var(--gold); background: var(--bg-card-active);
-box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 15px rgba(212, 175, 55, 0.1);
-}
-.card::before {
-content: ''; position: absolute; top: 0; right: 0; width: 3px; height: 100%;
-background: var(--gold); opacity: 0; transition: opacity 0.3s;
-}
-.card.active::before { opacity: 1; }
-.card-header {
-display: flex; align-items: center; gap: 12px; margin-bottom: 15px;
-padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.prayer-icon {
-width: 45px; height: 45px; background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-border-radius: 12px; display: flex; align-items: center; justify-content: center;
-font-size: 1.3rem; color: #000; flex-shrink: 0;
-}
-.card h2 { font-family: 'Reem Kufi', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); margin: 0; }
-.prayer-time { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; display: flex; align-items: center; gap: 4px; }
-.prayer-time i { color: var(--gold); font-size: 0.8rem; }
-.action-item {
-display: flex; align-items: center; justify-content: space-between;
-background: rgba(255, 255, 255, 0.04); margin: 10px 0; padding: 14px 16px;
-border-radius: 16px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; min-height: 65px;
-}
-.action-item:active { background: rgba(255, 255, 255, 0.08); }
-.action-item.done {
-background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
-border-color: var(--success);
-}
-.action-content { display: flex; align-items: center; gap: 12px; flex: 1; pointer-events: none; }
-.action-icon {
-width: 38px; height: 38px; border-radius: 10px; display: flex;
-align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
-}
-.prayer-action .action-icon { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
-.quran-action .action-icon { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
-.action-item.done .action-icon { background: rgba(16, 185, 129, 0.2); color: var(--success); }
-.action-text b { font-size: 1.15rem; font-weight: 700; display: block; margin-bottom: 2px; color: var(--text-primary); }
-.action-sub { font-size: 0.85rem; color: var(--text-secondary); opacity: 0.8; }
-.pages-badge {
-display: inline-flex; align-items: center; gap: 4px; background: rgba(212, 175, 55, 0.1);
-color: var(--gold); padding: 3px 8px; border-radius: 10px; font-size: 0.8rem;
-font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.2);
-}
-.action-item.done .pages-badge { background: rgba(16, 185, 129, 0.15); color: var(--success); border-color: var(--success); }
-.toggle-circle {
-width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.2);
-display: flex; align-items: center; justify-content: center; cursor: pointer;
-flex-shrink: 0; position: relative; background: rgba(0,0,0,0.3);
-transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.toggle-circle:active { transform: scale(0.85); background: rgba(255,255,255,0.1); }
-.toggle-circle:hover { border-color: var(--gold); }
-.toggle-circle.done {
-border-color: var(--success); background: var(--success);
-box-shadow: 0 0 15px var(--success-glow); transform: scale(1);
-}
-.toggle-circle i { font-size: 1.4rem; color: transparent; transition: 0.2s; }
-.toggle-circle.done i { color: #fff; transform: scale(1.1); }
-.profile-section { grid-column: 1 / -1; display: flex; justify-content: center; padding: 10px 0 20px; }
-.profile-card {
-text-align: center; background: rgba(255, 255, 255, 0.03); padding: 15px 25px;
-border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.2);
-backdrop-filter: blur(15px); display: inline-flex; align-items: center; gap: 15px;
-width: 100%; max-width: 400px;
-}
-.profile-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; flex-shrink: 0; }
-.profile-img img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-.profile-info { text-align: right; flex: 1; }
-.profile-name {
-font-family: 'Cairo', sans-serif; font-size: 1.3rem; font-weight: 900;
-color: var(--gold); margin: 0; display: flex; align-items: center; gap: 6px;
-}
-.verified-badge { color: #3b82f6; font-size: 1.2rem; }
-.profile-role { font-size: 0.9rem; color: var(--text-secondary); margin-top: 2px; display: flex; align-items: center; gap: 5px; }
-.profile-role i { color: var(--gold); }
-footer {
-text-align: center; padding: 20px 20px calc(30px + var(--safe-area-bottom));
-color: var(--text-secondary); font-size: 1.1rem; position: relative; z-index: 5; line-height: 1.5;
-}
-footer::before { content: '✦'; display: block; font-size: 1.5rem; margin-bottom: 8px; color: var(--gold); }
-.completion-message {
-position: fixed; bottom: 0; left: 0; right: 0; transform: translateY(100%);
-background: rgba(10, 15, 30, 0.98); border-top: 2px solid var(--gold);
-border-radius: 25px 25px 0 0; padding: 30px 25px calc(30px + var(--safe-area-bottom));
-text-align: center; z-index: 1500; box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
-transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); backdrop-filter: blur(20px);
-max-height: 90vh; overflow-y: auto;
-}
-.completion-message.show { transform: translateY(0); animation: slideUp 0.4s ease-out; }
-@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-.completion-message h3 { font-family: 'Reem Kufi', sans-serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-.completion-message p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; }
-.completion-message .btn-close {
-background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: #000;
-border: none; padding: 14px 0; width: 100%; border-radius: 14px;
-font-family: 'Reem Kufi', sans-serif; font-size: 1.1rem; font-weight: 700;
-cursor: pointer; box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
-}
-.welcome-overlay {
-position: fixed; inset: 0; background: rgba(5, 8, 15, 0.98); z-index: 2000;
-display: flex; align-items: center; justify-content: center; padding: 30px;
-}
-.welcome-overlay.hidden { display: none; }
-.welcome-card {
-background: var(--bg-card); border: 2px solid var(--gold); border-radius: 25px;
-padding: 35px 30px; text-align: center; max-width: 400px; width: 100%;
-box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.2);
-}
-.welcome-card h2 { font-family: 'Reem Kufi', sans-serif; font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
-.welcome-card p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
-.welcome-id {
-background: rgba(212, 175, 55, 0.1); color: var(--gold); padding: 10px;
-border-radius: 10px; font-family: monospace; font-size: 0.9rem; margin: 15px 0;
-border: 1px dashed rgba(212, 175, 55, 0.3);
-}
-.btn-welcome {
-width: 100%; background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-color: #000; border: none; border-radius: 12px; padding: 14px;
-font-family: 'Cairo', sans-serif; font-size: 1.1rem; font-weight: 700; cursor: pointer;
-}
-.loading { text-align: center; padding: 50px 20px; color: var(--gold); font-size: 1.2rem; }
-.loading i { display: block; font-size: 2rem; margin-bottom: 15px; animation: spin 1s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأدب والإسلامية #100</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --primary-literature: #2563eb;
+            --primary-islamic: #059669;
+            --today-highlight: #ea580c;
+            --text-main: #1e293b;
+        }
 
-/* Responsive */
-@media (min-width: 1024px) {
-.auth-bar { max-width: 1200px; margin: 0 auto; border-radius: 0 0 15px 15px; }
-.progress-container { max-width: 1200px; margin: 0 auto; border-radius: 0 0 10px 10px; }
-main { grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 30px; max-width: 1400px; }
-.card { padding: 25px; border-radius: 24px; }
-.card:hover { transform: translateY(-5px); }
-.card-header { gap: 15px; margin-bottom: 20px; }
-.prayer-icon { width: 55px; height: 55px; font-size: 1.6rem; }
-.card h2 { font-size: 1.9rem; }
-.action-item { padding: 18px 20px; min-height: 75px; }
-.action-text b { font-size: 1.3rem; }
-.toggle-circle { width: 52px; height: 52px; }
-h1 { font-size: 3.5rem; }
-.greeting { font-size: 1.3rem; }
-#date { font-size: 1.1rem; }
-.profile-card { padding: 20px 35px; max-width: 500px; }
-.profile-img { width: 75px; height: 75px; }
-.profile-name { font-size: 1.5rem; }
-.ramadan-decoration { top: 80px; left: 50px; font-size: 3.5rem; }
-.lantern { bottom: 80px; right: 50px; font-size: 4rem; }
-}
-@media (max-width: 1023px) {
-.auth-bar { padding: 10px 12px; }
-.user-avatar { width: 32px; height: 32px; font-size: 1rem; }
-.user-name { font-size: 0.9rem; }
-.user-id-display { font-size: 0.7rem; }
-.btn-auth { padding: 7px 14px; font-size: 0.85rem; }
-.progress-container { top: 50px; }
-main { padding: 12px; gap: 12px; }
-.card { padding: 18px; border-radius: 18px; }
-.card-header { gap: 10px; margin-bottom: 12px; padding-bottom: 10px; }
-.prayer-icon { width: 42px; height: 42px; font-size: 1.2rem; }
-.card h2 { font-size: 1.4rem; }
-.prayer-time { font-size: 0.8rem; }
-.action-item { padding: 12px 14px; margin: 8px 0; min-height: 60px; }
-.action-icon { width: 35px; height: 35px; font-size: 1rem; }
-.action-text b { font-size: 1.1rem; }
-.action-sub { font-size: 0.8rem; }
-.pages-badge { padding: 2px 7px; font-size: 0.75rem; }
-.toggle-circle { width: 44px; height: 44px; }
-.toggle-circle i { font-size: 1.3rem; }
-h1 { font-size: 2rem; }
-.greeting { font-size: 1rem; }
-#date { font-size: 0.95rem; }
-.profile-card { padding: 12px 20px; gap: 12px; }
-.profile-img { width: 55px; height: 55px; }
-.profile-name { font-size: 1.2rem; }
-.profile-role { font-size: 0.85rem; }
-.ramadan-decoration { top: 60px; left: 12px; font-size: 1.8rem; }
-.lantern { bottom: calc(60px + var(--safe-area-bottom)); right: 12px; font-size: 2.2rem; }
-}
-@media (max-width: 480px) {
-.auth-bar { flex-wrap: wrap; }
-.user-info { width: 100%; justify-content: center; margin-bottom: 8px; }
-.auth-actions { width: 100%; justify-content: center; }
-h1 { font-size: 1.8rem; }
-.card-header { flex-direction: column; text-align: center; }
-.prayer-time { justify-content: center; }
-.action-content { flex-direction: column; text-align: center; gap: 8px; }
-.profile-card { flex-direction: column; gap: 12px; }
-.profile-info { text-align: center; }
-.profile-name { justify-content: center; }
-}
-</style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-body);
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin: 0 0 5px 0;
+        }
+
+        .header p {
+            color: #64748b;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .day-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .is-today {
+            border-color: var(--today-highlight);
+            box-shadow: 0 10px 20px rgba(234, 88, 12, 0.15);
+            background: #fffbf0;
+            transform: translateY(-5px);
+        }
+
+        .today-badge {
+            background: var(--today-highlight);
+            color: white;
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+
+        .day-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topic-section {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .icon-box {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .bg-literature { background-color: var(--primary-literature); }
+        .bg-islamic { background-color: var(--primary-islamic); }
+
+        input[type="checkbox"] {
+            width: 24px; height: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 20px 10px; }
+            .header h1 { font-size: 1.8rem; }
+        }
+    </style>
 </head>
 <body>
-<div class="stars" id="stars"></div>
-<div class="ramadan-decoration"><i class="fas fa-moon"></i></div>
-<div class="lantern"><i class="fas fa-lightbulb"></i></div>
 
-<!-- 🔐 شريط تسجيل الدخول -->
-<div class="auth-bar" id="authBar">
-<div class="user-info" id="userInfo" style="display: none;">
-<div class="user-avatar" id="userAvatar">م</div>
-<div>
-<div class="user-name" id="userName">مستخدم</div>
-<div class="user-id-display" id="userIdDisplay">ID: ----</div>
-</div>
-</div>
-<div class="auth-actions">
-<button class="btn-auth btn-logout" id="btnLogout" style="display: none;" onclick="App.logout()">خروج</button>
-</div>
-</div>
+    <div class="header">
+        <h1>الأدب و الإسلامية #100</h1>
+        <p>دراسه طول ايام الاسبوع #100</p>
+    </div>
 
-<!-- شاشة الترحيب -->
-<div class="welcome-overlay" id="welcomeOverlay">
-<div class="welcome-card">
-<h2>🌙 أهلاً بك</h2>
-<p>مرحباً بك في محراب الختمة الملكي<br>تم توليد معرف فريد لجهازك</p>
-<div class="welcome-id" id="autoGeneratedId">جاري التوليد...</div>
-<button class="btn-welcome" onclick="App.start()">بدء الرحلة ✨</button>
-</div>
-</div>
+    <div class="grid-container" id="mainGrid"></div>
 
-<div class="progress-container"><div id="bar"></div></div>
+    <script>
+        const daysArr = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+        const displayOrder = ["السبت", "الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"];
+        
+        const todayIndex = new Date().getDay();
+        const todayName = daysArr[todayIndex];
 
-<header>
-<div class="greeting" id="greeting">رمضان كريم 🌙</div>
-<h1>مِحـرَابُ الخَتـمَة</h1>
-<div id="date"><i class="far fa-calendar-alt"></i><span id="date-text"></span></div>
-<div class="ramadan-day-badge" id="ramadanDayBadge">اليوم 1 من رمضان</div>
-</header>
+        const container = document.getElementById('mainGrid');
 
-<main id="app"><div class="loading"><i class="fas fa-spinner"></i>جاري التحميل...</div></main>
+        displayOrder.forEach((day) => {
+            const isToday = (day === todayName);
+            const card = document.createElement('div');
+            card.className = `day-card ${isToday ? 'is-today' : ''}`;
+            
+            const id1 = `check-${day}-lit`;
+            const id2 = `check-${day}-islamic`;
 
-<footer>
-"اللهم اجعلنا من أهل القرآن"
-<br>
-<span style="font-size:1rem;color:var(--gold);margin-top:6px;display:block">
-<i class="fas fa-heart" style="color:#e74c3c;margin:0 4px"></i>
-تقبل الله منا ومنكم
-</span>
-</footer>
+            card.innerHTML = `
+                <div class="day-name">
+                    <span>${day}</span>
+                    ${isToday ? '<span class="today-badge">اليوم حالياً ✨</span>' : ''}
+                </div>
+                
+                <div class="topic-section">
+                    <div style="display:flex; align-items:center; gap:12px">
+                        <div class="icon-box bg-literature"><i class="fas fa-pen-nib"></i></div>
+                        <div><b>موضوع الأدب</b></div>
+                    </div>
+                    <input type="checkbox" id="${id1}" onchange="saveStatus('${id1}')" style="accent-color:var(--primary-literature)">
+                </div>
 
-<div class="completion-message" id="completionMsg">
-<h3><i class="fas fa-crown"></i> مبارك عليك!</h3>
-<p>أتممت جميع مهام اليوم بنجاح 🎉<br>وصلت إلى 100% بإذن الله</p>
-<button class="btn-close" onclick="App.closeCompletion()">أحسنت!</button>
-</div>
+                <div class="topic-section">
+                    <div style="display:flex; align-items:center; gap:12px">
+                        <div class="icon-box bg-islamic"><i class="fas fa-mosque"></i></div>
+                        <div><b>موضوع إسلامية</b></div>
+                    </div>
+                    <input type="checkbox" id="${id2}" onchange="saveStatus('${id2}')" style="accent-color:var(--primary-islamic)">
+                </div>
+            `;
+            container.appendChild(card);
+            
+            loadStatus(id1);
+            loadStatus(id2);
+        });
 
-<script>
-/**
- * 🌙 محراب الختمة الملكي - النسخة الاحترافية
- * المطورة: مروة محمد
- * الإصدار: 2.0
- */
+        function saveStatus(id) {
+            const checkbox = document.getElementById(id);
+            localStorage.setItem(id, checkbox.checked);
+        }
 
-// 🔐 إعدادات الحماية
-(function protect() {
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('selectstart', e => e.preventDefault());
-document.addEventListener('copy', e => e.preventDefault());
-document.addEventListener('cut', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-if (e.ctrlKey && ['c','u','s','p'].includes(e.key.toLowerCase())) e.preventDefault();
-if (e.key === 'F12') e.preventDefault();
-});
-})();
-
-// ⚙️ إعدادات التطبيق
-const CONFIG = {
-// 📅 هام: عدّل تاريخ بداية رمضان حسب رؤية بلدك
-ramadanStartDate: '2026-02-18',
-// 📊 إعدادات التخزين
-storage: {
-prefix: 'ramadan_',
-userKey: 'user_id',
-dateKey: 'last_date',
-stateKey: 'tasks'
-},
-// 📡 إعدادات تليجرام (اختياري)
-telegram: {
-token: "8457845103:AAFXlTTnoLyTWyGfXsT7hgZrpsVVjkPQWb8",
-chatId: null
-},
-// 📖 إعدادات الختمة
-quran: {
-totalPages: 604,
-pagesPerDay: 20,
-pagesPerPrayer: 4
-},
-// 🕌 الصلوات
-prayers: [
-{ id: 0, name: "الفجر", icon: "fa-cloud-sun", time: "قبل الشروق" },
-{ id: 1, name: "الظهر", icon: "fa-sun", time: "بعد الزوال" },
-{ id: 2, name: "العصر", icon: "fa-cloud-sun", time: "قبل الغروب" },
-{ id: 3, name: "المغرب", icon: "fa-moon", time: "بعد الغروب" },
-{ id: 4, name: "العشاء", icon: "fa-star", time: "بعد العشاء" }
-]
-};
-
-// 🎯 وحدة التطبيق الرئيسية
-const App = {
-// الخصائص
-userId: null,
-deviceType: null,
-ramadanDay: null,
-
-// 🚀 التهيئة
-init() {
-this.detectDevice();
-this.generateUserId();
-this.createStars();
-this.renderWelcome();
-},
-
-// 📱 كشف نوع الجهاز
-detectDevice() {
-const ua = navigator.userAgent;
-const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
-const isTablet = /ipad|tablet|playbook|silk/i.test(ua);
-const sw = window.screen.width;
-if (isMobile && !isTablet) this.deviceType = 'mobile';
-else if (isTablet || (sw > 600 && sw < 1024)) this.deviceType = 'tablet';
-else this.deviceType = 'desktop';
-console.log(`📱 الجهاز: ${this.deviceType}`);
-},
-
-// 🔑 توليد معرف مستخدم فريد تلقائياً
-generateUserId() {
-const stored = localStorage.getItem(CONFIG.storage.prefix + CONFIG.storage.userKey);
-if (stored) {
-this.userId = stored;
-} else {
-// توليد ID فريد بناءً على بصمة الجهاز + وقت عشوائي
-const fingerprint = btoa(
-(navigator.userAgent + navigator.platform + new Date().getTime())
-.split('').reverse().join('')
-).substring(0, 12).replace(/[^a-zA-Z0-9]/g, '');
-this.userId = `RM${fingerprint}`;
-localStorage.setItem(CONFIG.storage.prefix + CONFIG.storage.userKey, this.userId);
-console.log(`🆔 تم توليد ID: ${this.userId}`);
-}
-},
-
-// 🌟 إنشاء النجوم الخلفية
-createStars() {
-const container = document.getElementById('stars');
-if (container.children.length) return;
-const count = this.deviceType === 'desktop' ? 80 : 30;
-for (let i = 0; i < count; i++) {
-const star = document.createElement('div');
-star.className = 'star';
-star.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;animation-delay:${Math.random()*3}s`;
-container.appendChild(star);
-}
-},
-
-// 🎬 عرض شاشة الترحيب
-renderWelcome() {
-document.getElementById('autoGeneratedId').textContent = this.userId;
-},
-
-// ▶️ بدء التطبيق
-start() {
-document.getElementById('welcomeOverlay').classList.add('hidden');
-this.renderAuth();
-this.renderApp();
-this.setupAutoRefresh();
-},
-
-// 👤 عرض شريط المصادقة
-renderAuth() {
-const userInfo = document.getElementById('userInfo');
-const btnLogout = document.getElementById('btnLogout');
-userInfo.style.display = 'flex';
-btnLogout.style.display = 'block';
-document.getElementById('userName').textContent = 'مستخدم';
-document.getElementById('userIdDisplay').textContent = `ID: ${this.userId}`;
-document.getElementById('userAvatar').textContent = this.userId.charAt(2)?.toUpperCase() || 'م';
-},
-
-// 📅 حساب يوم رمضان الحالي
-getRamadanDay() {
-const today = new Date(); today.setHours(0,0,0,0);
-const start = new Date(CONFIG.ramadanStartDate); start.setHours(0,0,0,0);
-const diff = Math.floor((today - start) / (1000*60*60*24));
-if (diff < 0) return { day: 0, index: -1, finished: false, before: true };
-if (diff >= 30) return { day: 30, index: 29, finished: true };
-return { day: diff + 1, index: diff, finished: false };
-},
-
-// 📖 حساب نطاق الصفحات لكل صلاة
-getPageRange(prayerIndex) {
-const day = this.getRamadanDay();
-if (day.index < 0) return "1 - 4";
-const basePage = (day.index * CONFIG.quran.pagesPerDay) + 1;
-const start = basePage + (prayerIndex * CONFIG.quran.pagesPerPrayer);
-const end = Math.min(start + CONFIG.quran.pagesPerPrayer - 1, CONFIG.quran.totalPages);
-return `${start} - ${end}`;
-},
-
-// 🔄 التحقق من تغيير اليوم وتصفير المهام
-checkDailyReset() {
-const today = new Date().toDateString();
-const key = `${CONFIG.storage.prefix}${CONFIG.storage.dateKey}_${this.userId}`;
-const last = localStorage.getItem(key);
-if (last !== today) {
-// حفظ سجل اليوم السابق
-const oldState = JSON.parse(localStorage.getItem(`${CONFIG.storage.prefix}${CONFIG.storage.stateKey}_${this.userId}`) || '{}');
-const completed = Object.values(oldState).filter(v => v).length;
-if (completed > 0) {
-const history = JSON.parse(localStorage.getItem(`${CONFIG.storage.prefix}history_${this.userId}`) || '[]');
-history.push({ date: last || 'أول يوم', completed, total: 10 });
-localStorage.setItem(`${CONFIG.storage.prefix}history_${this.userId}`, JSON.stringify(history.slice(-30)));
-}
-// تصفير المهام لليوم الجديد
-localStorage.setItem(`${CONFIG.storage.prefix}${CONFIG.storage.stateKey}_${this.userId}`, '{}');
-localStorage.setItem(key, today);
-console.log('🔄 تم تصفير المهام لليوم الجديد');
-return true;
-}
-return false;
-},
-
-// 🎨 عرض التطبيق الرئيسي
-renderApp() {
-const day = this.getRamadanDay();
-this.ramadanDay = day;
-
-// تحديث شارة اليوم
-const badge = document.getElementById('ramadanDayBadge');
-if (day.before) {
-badge.textContent = 'رمضان قريب 🌙';
-badge.style.background = 'rgba(59, 130, 246, 0.15)';
-badge.style.borderColor = '#3b82f6';
-} else if (day.finished) {
-badge.textContent = '✅ تمت الختمة بفضل الله';
-badge.style.background = 'rgba(16, 185, 129, 0.2)';
-badge.style.borderColor = 'var(--success)';
-badge.style.color = 'var(--success)';
-} else {
-badge.textContent = `اليوم ${day.day} من رمضان`;
-badge.style.background = '';
-badge.style.borderColor = '';
-badge.style.color = '';
-}
-
-// عرض حالة التحميل أو الختمة
-const app = document.getElementById('app');
-if (day.before) {
-app.innerHTML = `<div class="card" style="text-align:center;padding:40px">
-<div class="prayer-icon" style="margin:0 auto 20px"><i class="fas fa-moon"></i></div>
-<h2>رمضان قريب 🌙</h2>
-<p style="color:var(--text-secondary);margin-top:10px">استعد للختمة المباركة</p>
-</div>`;
-return;
-}
-if (day.finished) {
-app.innerHTML = `<div class="card active" style="text-align:center;padding:40px">
-<div class="prayer-icon" style="margin:0 auto 20px;background:linear-gradient(135deg,#10b981,#34d399)"><i class="fas fa-check-circle"></i></div>
-<h2 style="color:var(--success)">تمت الختمة! 🎉</h2>
-<p style="color:var(--text-secondary);margin-top:10px">أتممت قراءة القرآن كاملاً بفضل الله</p>
-<p style="color:var(--gold);margin-top:10px">تقبل الله منك ومنّا</p>
-</div>`;
-return;
-}
-
-// تصفير المهام إذا تغير اليوم
-this.checkDailyReset();
-
-// تحديث التاريخ والتحية
-this.updateDateAndGreeting();
-
-// جلب حالة المهام
-const stateKey = `${CONFIG.storage.prefix}${CONFIG.storage.stateKey}_${this.userId}`;
-const state = JSON.parse(localStorage.getItem(stateKey) || '{}');
-
-// إنشاء بطاقات الصلوات
-const cards = CONFIG.prayers.map(prayer => {
-const pKey = `p${prayer.id}`, qKey = `q${prayer.id}`;
-const pDone = state[pKey] === true, qDone = state[qKey] === true;
-const active = pDone && qDone ? 'active' : '';
-const pageRange = this.getPageRange(prayer.id);
-return `
-<div class="card ${active}" data-prayer="${prayer.id}">
-<div class="card-header">
-<div class="prayer-icon"><i class="fas ${prayer.icon}"></i></div>
-<div>
-<h2>صلاة ${prayer.name}</h2>
-<div class="prayer-time"><i class="far fa-clock"></i><span>${prayer.time}</span></div>
-</div>
-</div>
-<div class="action-item prayer-action ${pDone ? 'done' : ''}" onclick="App.toggleTask(${prayer.id}, 'p')">
-<div class="action-content">
-<div class="action-icon"><i class="fas fa-person-praying"></i></div>
-<div class="action-text"><b>أداء الفريضة</b><span class="action-sub">+10%</span></div>
-</div>
-<div class="toggle-circle ${pDone ? 'done' : ''}"><i class="fas fa-check"></i></div>
-</div>
-<div class="action-item quran-action ${qDone ? 'done' : ''}" onclick="App.toggleTask(${prayer.id}, 'q')">
-<div class="action-content">
-<div class="action-icon"><i class="fas fa-book-quran"></i></div>
-<div class="action-text"><b>قراءة القرآن</b><span class="pages-badge">ص ${pageRange}</span></div>
-</div>
-<div class="toggle-circle ${qDone ? 'done' : ''}"><i class="fas fa-check"></i></div>
-</div>
-</div>`;
-}).join('');
-
-// عرض البروفايل
-const profile = `
-<div class="profile-section">
-<div class="profile-card">
-<div class="profile-img">
-<img src="https://iili.io/fbckoRn.md.jpg" alt="مروة محمد" onerror="this.src='https://ui-avatars.com/api/?name=Marwa+Mohammad&background=d4af37&color=0a0e17&size=128'">
-</div>
-<div class="profile-info">
-<h3 class="profile-name">مروة محمد <i class="material-icons verified-badge">verified</i></h3>
-<div class="profile-role"><i class="fas fa-code"></i><span>مُطوِّرة المنصة</span></div>
-</div>
-</div>
-</div>`;
-
-app.innerHTML = cards + profile;
-this.updateProgress();
-this.checkCompletion();
-},
-
-// 📊 تحديث شريط التقدم
-updateProgress() {
-const stateKey = `${CONFIG.storage.prefix}${CONFIG.storage.stateKey}_${this.userId}`;
-const state = JSON.parse(localStorage.getItem(stateKey) || '{}');
-const total = CONFIG.prayers.length * 2; // 10 مهام
-const done = Object.values(state).filter(v => v === true).length;
-const percent = Math.round((done / total) * 100);
-const bar = document.getElementById('bar');
-bar.style.width = `${percent}%`;
-bar.classList[percent === 100 ? 'add' : 'remove']('full');
-},
-
-// ✅ التحقق من إتمام جميع المهام (10/10)
-checkCompletion() {
-const stateKey = `${CONFIG.storage.prefix}${CONFIG.storage.stateKey}_${this.userId}`;
-const state = JSON.parse(localStorage.getItem(stateKey) || '{}');
-const total = CONFIG.prayers.length * 2;
-const done = Object.values(state).filter(v => v === true).length;
-// ✅ مهم: لا تظهر الرسالة إلا عند إكمال الـ 10 مهام كلها
-if (done === total && total > 0) {
-setTimeout(() => {
-document.getElementById('completionMsg').classList.add('show');
-this.vibrate([50, 50, 50]);
-this.sendNotification(`🎉 <b>أحسنت!</b>\nالمستخدم: ${this.userId}\nأتممت جميع مهام <b>محراب الختمة</b> لهذا اليوم (100%).\n<em>تقبل الله منك ومنّا</em> 🌙`);
-}, 300);
-}
-},
-
-// 🔄 تبديل حالة المهمة
-toggleTask(prayerId, type) {
-const stateKey = `${CONFIG.storage.prefix}${CONFIG.storage.stateKey}_${this.userId}`;
-const state = JSON.parse(localStorage.getItem(stateKey) || '{}');
-const key = `${type}${prayerId}`;
-state[key] = !state[key];
-localStorage.setItem(stateKey, JSON.stringify(state));
-
-// تحديث الواجهة
-const card = document.querySelector(`.card[data-prayer="${prayerId}"]`);
-if (!card) return;
-const selector = type === 'p' ? '.prayer-action' : '.quran-action';
-const item = card.querySelector(selector);
-const circle = item.querySelector('.toggle-circle');
-if (state[key]) {
-item.classList.add('done');
-circle.classList.add('done');
-// تفعيل البطاقة إذا اكتملت المهمتان
-const other = card.querySelector(type === 'p' ? '.quran-action' : '.prayer-action');
-if (other?.classList.contains('done')) card.classList.add('active');
-} else {
-item.classList.remove('done');
-circle.classList.remove('done');
-card.classList.remove('active');
-}
-
-// تحديث التقدم والتحقق من الإتمام
-this.updateProgress();
-this.checkCompletion();
-
-// اهتزاز وإشعار
-this.vibrate(30);
-const prayer = CONFIG.prayers.find(p => p.id === prayerId);
-const msg = type === 'p' 
-? `✅ <b>صليت ${prayer.name}</b>` 
-: `📖 <b>قرأت ورد ${prayer.name}</b> (ص ${this.getPageRange(prayerId)})`;
-if (state[key]) this.sendNotification(msg);
-},
-
-// 🔔 إرسال إشعار تليجرام
-sendNotification(text) {
-if (!CONFIG.telegram.chatId || CONFIG.telegram.chatId.includes('ضع_رقم')) return;
-setTimeout(() => {
-fetch(`https://api.telegram.org/bot${CONFIG.telegram.token}/sendMessage?chat_id=${CONFIG.telegram.chatId}&text=${encodeURIComponent(text)}&parse_mode=HTML`)
-.catch(() => {});
-}, 0);
-},
-
-// 📳 اهتزاز الجهاز
-vibrate(pattern = 10) {
-if (navigator.vibrate) navigator.vibrate(pattern);
-},
-
-// 🕐 تحديث التاريخ والتحية
-updateDateAndGreeting() {
-const now = new Date();
-document.getElementById('date-text').textContent = now.toLocaleDateString('ar-SA', { weekday: 'long', day: 'numeric', month: 'long' });
-const h = now.getHours();
-const g = document.getElementById('greeting');
-if (h >= 5 && h < 12) g.textContent = 'صباح الخير 🌅 رمضان مبارك';
-else if (h >= 12 && h < 18) g.textContent = 'مساء النور 🌤️ تقبل الله طاعتكم';
-else g.textContent = 'ليلة طيبة 🌙 اللهم اجعلها ليلة مغفرة';
-},
-
-// 🚪 تسجيل الخروج
-logout() {
-if (confirm('هل أنت متأكد من تسجيل الخروج؟\nسيتم حفظ تقدمك ويمكنك العودة بنفس الجهاز لاحقاً.')) {
-localStorage.removeItem(CONFIG.storage.prefix + CONFIG.storage.userKey);
-location.reload();
-}
-},
-
-// ❌ إغلاق رسالة الإنجاز
-closeCompletion() {
-document.getElementById('completionMsg').classList.remove('show');
-this.vibrate(20);
-},
-
-// 🔄 التحديث التلقائي كل دقيقتين للتحقق من تغير اليوم
-setupAutoRefresh() {
-setInterval(() => {
-const today = new Date().toDateString();
-const key = `${CONFIG.storage.prefix}${CONFIG.storage.dateKey}_${this.userId}`;
-if (localStorage.getItem(key) !== today) {
-this.renderApp();
-}
-}, 120000);
-}
-};
-
-// 🚀 تشغيل التطبيق عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', () => {
-App.init();
-});
-
-// 🔗 ربط الدوال بالنوافذ العالمية
-window.App = App;
-</script>
+        function loadStatus(id) {
+            const savedValue = localStorage.getItem(id);
+            if (savedValue === "true") {
+                const el = document.getElementById(id);
+                if(el) el.checked = true;
+            }
+        }
+    </script>
 </body>
 </html>
