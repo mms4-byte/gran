@@ -2,811 +2,536 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>نسبة الحب</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>نظام الدراسة الصارم</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+:root{--g1:#0e6b47;--g2:#1f9d6a;--gd1:#e7bc45;--gd2:#c99a1f;--ink:#173f2c;--sub:#8aa093;--card:rgba(255,255,255,.55);--brd:rgba(255,255,255,.7);--sl1:#5b6cff;--sl2:#764ba2;--rd:#dc3545;--pr1:#8b5cf6;--pr2:#6d28d9}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tahoma,sans-serif;color:var(--ink);
+  background:radial-gradient(90% 70% at 85% 8%,rgba(23,138,94,.20),transparent 60%),radial-gradient(80% 60% at 8% 92%,rgba(217,169,46,.28),transparent 60%),linear-gradient(160deg,#f7f4ea 0%,#eef0e2 45%,#d7ead9 100%);
+  background-size:200% 200%;animation:bg 18s ease infinite}
+@keyframes bg{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes up{from{opacity:0;transform:translateY(16px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.app{height:100vh;width:100vw;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 18px env(safe-area-inset-bottom);overflow-y:auto;overflow-x:hidden}
+.app>*{animation:up .55s cubic-bezier(.2,.7,.3,1) both}
+.app>:nth-child(2){animation-delay:.06s}.app>:nth-child(3){animation-delay:.12s}.app>:nth-child(4){animation-delay:.18s}.app>:nth-child(5){animation-delay:.24s}.app>:nth-child(6){animation-delay:.3s}
 
-  :root {
-    --bg: #F2F2F7;
-    --card: rgba(255,255,255,0.9);
-    --card-border: rgba(255,255,255,0.8);
-    --text: #1C1C1E;
-    --text2: #8E8E93;
-    --blue: #007AFF;
-    --blue-bg: rgba(0,122,255,0.12);
-    --green: #34C759;
-    --green-bg: rgba(52,199,89,0.12);
-    --orange: #FF9500;
-    --orange-bg: rgba(255,149,0,0.12);
-    --red: #FF2D55;
-    --red-bg: rgba(255,45,85,0.12);
-    --purple: #AF52DE;
-    --purple-bg: rgba(175,82,222,0.12);
-    --pink: #FF2D55;
-    --pink-bg: rgba(255,45,85,0.1);
-    --divider: rgba(60,60,67,0.12);
-    --shadow: 0 2px 20px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
-    --radius: 20px;
-    --radius-sm: 14px;
-    --modal-bg: #F2F2F7;
-  }
+.header{display:flex;justify-content:space-between;align-items:center;padding:12px 0;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px}
+.logo-badge{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--g2),var(--g1));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(14,107,71,.3)}
+.logo-badge svg{width:23px;height:23px;fill:#fff}
+.logo-txt b{font-size:17px;font-weight:900;background:linear-gradient(90deg,var(--gd2),#178a5e);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1.15}
+.logo-txt span{font-size:10px;color:var(--sub);font-weight:700}
+.btns{display:flex;gap:9px}
+.icon-btn{width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.65);backdrop-filter:blur(10px);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;box-shadow:0 6px 16px rgba(23,84,58,.10)}
+.icon-btn:active{transform:scale(.88)}.icon-btn svg{width:18px;height:18px;fill:#178a5e}
 
-  .dark {
-    --bg: #000000;
-    --card: rgba(28,28,30,0.9);
-    --card-border: rgba(255,255,255,0.1);
-    --text: #F5F5F7;
-    --text2: #8E8E93;
-    --divider: rgba(255,255,255,0.1);
-    --shadow: 0 2px 20px rgba(0,0,0,0.4);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.6);
-    --modal-bg: #1C1C1E;
-  }
+.now-bar{flex-shrink:0;display:flex;align-items:center;gap:11px;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--brd);border-radius:18px;padding:12px 15px;margin-bottom:12px;box-shadow:0 8px 24px rgba(23,84,58,.08)}
+.now-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+.now-dot.study{background:var(--g2);box-shadow:0 0 0 4px rgba(31,157,106,.2)}
+.now-dot.break{background:var(--gd1);box-shadow:0 0 0 4px rgba(231,188,69,.2)}
+.now-dot.free{background:#38bdf8;box-shadow:0 0 0 4px rgba(56,189,248,.2)}
+.now-dot.sleep{background:var(--sl1);box-shadow:0 0 0 4px rgba(91,108,255,.2)}
+.now-txt{flex:1;min-width:0}
+.now-txt b{font-size:14px;font-weight:900;display:block}
+.now-txt span{font-size:11px;color:var(--sub);font-weight:600;display:block}
+.now-time{text-align:center}
+.now-time b{font-size:15px;font-weight:900;color:var(--g1);background:#e4efe7;padding:5px 12px;border-radius:11px;display:block}
+.now-time span{font-size:9px;color:var(--sub);font-weight:700}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+.top-zone{flex-shrink:0;display:flex;flex-direction:column;align-items:center;margin-bottom:12px}
+.dial{position:relative;width:146px;height:146px;cursor:pointer;background:var(--card);border-radius:50%;backdrop-filter:blur(14px);border:1px solid var(--brd);box-shadow:0 14px 34px rgba(23,84,58,.16),0 0 0 6px rgba(255,255,255,.25)}
+.dial:active{transform:scale(.96)}
+.dial svg.ring{width:100%;height:100%;transform:rotate(-90deg)}
+.dial-bg{fill:none;stroke:rgba(23,138,94,.14);stroke-width:12}
+.dial-fg{fill:none;stroke:url(#grad);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset .9s cubic-bezier(.3,.7,.3,1)}
+.dial-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.dial-num{font-size:33px;font-weight:900;line-height:1;color:var(--g1)}
+.dial-label{font-size:11px;color:var(--sub);font-weight:700;margin-top:3px}
 
-  html, body { width: 100%; min-height: 100vh; min-height: 100dvh; }
+.timeline{width:100%;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--brd);border-radius:20px;padding:13px 15px;margin-top:13px;box-shadow:0 8px 24px rgba(23,84,58,.08)}
+.tl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.tl-head b{font-size:13px;font-weight:900}
+.tl-chip{font-size:10.5px;font-weight:800;color:var(--g1);background:#e4efe7;padding:4px 11px;border-radius:99px}
+.tl-track{position:relative;height:30px;border-radius:99px;background:#e9efe9;overflow:hidden;display:flex;direction:ltr}
+.tl-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;overflow:hidden;white-space:nowrap;transition:filter .4s}
+.tl-seg.active{filter:brightness(1.15) saturate(1.2);box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+.tl-study{background:linear-gradient(90deg,#1f9d6a,#2bb673)}
+.tl-breakS{background:repeating-linear-gradient(45deg,#e7bc45 0 6px,#f0ca62 6px 12px)}
+.tl-breakL{background:linear-gradient(90deg,#d9a92e,#c99a1f)}
+.tl-free{background:linear-gradient(90deg,#38bdf8,#0ea5e9)}
+.tl-wind{background:linear-gradient(90deg,#a78bfa,#8b5cf6)}
+.tl-sleep{background:linear-gradient(90deg,#5b6cff,#764ba2)}
+.tl-now{position:absolute;top:-3px;bottom:-3px;width:3px;background:var(--rd);border-radius:2px;box-shadow:0 0 8px rgba(220,53,69,.7);transition:left 1s linear;z-index:2}
+.tl-now::after{content:'';position:absolute;top:-5px;left:-3.5px;width:10px;height:10px;border-radius:50%;background:var(--rd);animation:pulse 1.6s infinite}
+.tl-ticks{position:relative;height:13px;margin-top:6px;direction:ltr}
+.tl-ticks span{position:absolute;transform:translateX(-50%);font-size:8.5px;font-weight:800;color:#9db5a7}
+.tl-legend{display:flex;justify-content:center;gap:11px;margin-top:6px;flex-wrap:wrap}
+.tl-legend span{display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:var(--sub)}
+.tl-legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
 
-  body {
-    font-family: 'Tajawal', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    transition: background 0.4s ease, color 0.4s ease;
-  }
+.subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:13px;padding-bottom:13px}
+.card{background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--brd);border-radius:22px;padding:15px;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(23,84,58,.10)}
+.card-head{display:flex;align-items:center;gap:11px;margin-bottom:8px}
+.card-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card-icon svg{width:22px;height:22px;fill:#fff}
+.card-icon.math{background:linear-gradient(135deg,var(--gd1),var(--gd2));box-shadow:0 8px 18px rgba(201,154,31,.35)}
+.card-icon.arabic{background:linear-gradient(135deg,var(--g2),var(--g1));box-shadow:0 8px 18px rgba(14,107,71,.30)}
+.card-icon.prayer{background:linear-gradient(135deg,var(--pr1),var(--pr2));box-shadow:0 8px 18px rgba(109,40,217,.3)}
+.card-title h3{font-size:17px;font-weight:900}
+.card-title span{font-size:10.5px;color:var(--sub);font-weight:600}
+.card-count{margin-right:auto;background:#e4efe7;color:#177a4c;padding:4px 11px;border-radius:20px;font-weight:800;font-size:12.5px}
+.card-bar{height:5px;border-radius:99px;background:rgba(23,138,94,.12);overflow:hidden;margin-bottom:11px}
+.card-bar i{display:block;height:100%;border-radius:99px;width:0;transition:width .6s}
+.card-bar.math i{background:linear-gradient(90deg,var(--gd1),var(--gd2))}
+.card-bar.arabic i{background:linear-gradient(90deg,var(--g2),var(--g1))}
+.card-bar.prayer i{background:linear-gradient(90deg,var(--pr1),var(--pr2))}
+.hours{display:flex;flex-direction:column;gap:7px;flex:1}
+.hour-item{display:flex;align-items:center;justify-content:space-between;background:rgba(228,239,231,.55);border:1px solid rgba(23,138,94,.12);border-radius:13px;padding:9px 13px;cursor:pointer;transition:.25s}
+.hour-item:active{transform:scale(.98)}
+.hour-item.done{background:rgba(23,138,94,.16);border-color:rgba(23,138,94,.4)}
+.hour-item.done.p-item{background:rgba(139,92,246,.14);border-color:rgba(139,92,246,.45)}
+.hour-info{display:flex;align-items:center;gap:9px}
+.hour-info svg{width:17px;height:17px;fill:#5d8a72}
+.hour-item.done .hour-info svg{fill:var(--g1)}
+.p-item .hour-info svg{fill:#8a7ab8}
+.p-item.done .hour-info svg{fill:var(--pr2)}
+.hour-text b{font-size:13.5px;font-weight:800;display:block}
+.hour-text span{font-size:10px;color:var(--sub);font-weight:600}
+.check-circle{width:24px;height:24px;border-radius:50%;border:2px solid rgba(23,138,94,.35);display:flex;align-items:center;justify-content:center;transition:.25s}
+.check-circle svg{width:13px;height:13px;fill:transparent;transition:.25s}
+.hour-item.done .check-circle{background:linear-gradient(135deg,var(--g2),var(--g1));border-color:transparent;animation:pop .35s}
+.p-item.done .check-circle{background:linear-gradient(135deg,var(--pr1),var(--pr2))}
+.hour-item.done .check-circle svg{fill:#fff}
 
-  .bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-  .bg-orbs .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: orbFloat 25s ease-in-out infinite; }
-  .dark .bg-orbs .orb { opacity: 0.2; }
-  .bg-orbs .orb:nth-child(1) { width: 500px; height: 500px; background: var(--pink); top: -150px; right: -150px; }
-  .bg-orbs .orb:nth-child(2) { width: 400px; height: 400px; background: var(--purple); bottom: 15%; left: -120px; animation-delay: -8s; }
-  .bg-orbs .orb:nth-child(3) { width: 350px; height: 350px; background: var(--red); top: 55%; right: -100px; animation-delay: -16s; }
+/* كرت القفل + الوجبات + الوقت الضائع */
+.sleep-mon{position:relative;flex-shrink:0;margin-top:auto;background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--brd);border-radius:22px;padding:15px 16px;box-shadow:0 10px 30px rgba(23,84,58,.10);transition:.35s;margin-bottom:4px}
+.sleep-mon.locked{border-color:rgba(220,53,69,.5);background:rgba(255,235,238,.78)}
+.sleep-mon.ready{border-color:rgba(23,138,94,.5);background:rgba(228,245,235,.78)}
+.sleep-mon.asleep{border-color:rgba(91,108,255,.5);background:rgba(235,238,255,.78)}
+.sm-top{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.sm-icon{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,var(--sl1),var(--sl2));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 8px 18px rgba(91,108,255,.3)}
+.sleep-mon.locked .sm-icon{background:linear-gradient(135deg,#ff6b6b,var(--rd));box-shadow:0 8px 18px rgba(220,53,69,.3)}
+.sleep-mon.ready .sm-icon{background:linear-gradient(135deg,var(--g2),var(--g1));box-shadow:0 8px 18px rgba(14,107,71,.3)}
+.sm-icon svg{width:23px;height:23px;fill:#fff}
+.sm-txt{flex:1}
+.sm-txt b{font-size:15px;font-weight:900;display:block}
+.sm-txt span{font-size:10.5px;color:var(--sub);font-weight:600}
+.sleep-mon.locked .sm-txt b{color:#c0392b}.sleep-mon.ready .sm-txt b{color:var(--g1)}
+.sm-status{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:800;background:#e4efe7;color:#177a4c}
+.sleep-mon.locked .sm-status{background:#ffe0e3;color:var(--rd)}
+.sleep-mon.ready .sm-status{background:#d4f5e2;color:var(--g1)}
+.sleep-mon.asleep .sm-status{background:#e3e7ff;color:var(--sl1)}
+.sm-bar{height:7px;background:rgba(91,108,255,.13);border-radius:99px;overflow:hidden;margin-bottom:11px}
+.sm-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--sl1),var(--sl2));transition:width .6s}
+.sleep-mon.locked .sm-bar{background:rgba(220,53,69,.13)}
+.sleep-mon.locked .sm-bar i{background:linear-gradient(90deg,#ff6b6b,var(--rd))}
+.sleep-mon.ready .sm-bar{background:rgba(23,138,94,.13)}
+.sleep-mon.ready .sm-bar i{background:linear-gradient(90deg,var(--g2),var(--g1))}
+.sm-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sm-time{flex:1;min-width:62px;text-align:center;font-size:11.5px;font-weight:800;color:#3a2d6b;background:rgba(91,108,255,.1);border-radius:11px;padding:7px}
+.sm-time small{display:block;font-size:9px;color:var(--sub);font-weight:700;margin-top:2px}
+.sm-btn{padding:9px 13px;border-radius:12px;border:none;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px;transition:.2s}
+.sm-btn:active{transform:scale(.94)}.sm-btn svg{width:14px;height:14px;fill:currentColor}
+.sm-btn:disabled{opacity:.4;cursor:not-allowed}
+.sm-sleep{background:linear-gradient(135deg,var(--sl1),var(--sl2));color:#fff;box-shadow:0 8px 18px rgba(91,108,255,.3)}
+.sm-wake{background:linear-gradient(135deg,var(--gd1),var(--gd2));color:#fff;box-shadow:0 8px 18px rgba(201,154,31,.3)}
+.sm-chart{background:rgba(91,108,255,.12);color:var(--sl1)}
+.sm-divider{display:flex;align-items:center;gap:8px;margin:13px 0 9px;color:var(--sub);font-size:10.5px;font-weight:800}
+.sm-divider::before,.sm-divider::after{content:'';flex:1;height:1px;background:rgba(23,84,58,.12)}
+.meals-row{display:flex;gap:8px}
+.meal-btn{flex:1;border-radius:14px;padding:8px 4px;border:1.5px solid rgba(23,84,58,.15);background:rgba(255,255,255,.55);cursor:pointer;font-family:inherit;transition:.25s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.meal-btn svg{width:16px;height:16px;fill:#8aa093}
+.meal-btn b{font-size:11.5px;font-weight:800}
+.meal-btn span{font-size:9px;color:var(--sub);font-weight:700;min-height:11px}
+.meal-btn.eating{border-color:var(--gd1);background:#fdf6e3}
+.meal-btn.eating svg{fill:var(--gd2)}
+.meal-btn.done{border-color:rgba(23,138,94,.5);background:#e4efe7}
+.meal-btn.done svg{fill:#177a4c}
+.waste-row{display:flex;gap:8px;margin-top:10px}
+.sm-waste{background:linear-gradient(135deg,#ff8a5c,var(--rd));color:#fff;box-shadow:0 8px 18px rgba(220,53,69,.25);flex:1.3;justify-content:center}
+.sm-waste.running{animation:wp 1.2s infinite}
+@keyframes wp{0%,100%{filter:brightness(1)}50%{filter:brightness(1.3)}}
+.reset-note{display:flex;align-items:center;justify-content:center;gap:6px;font-size:10.5px;color:var(--sub);font-weight:700;padding:10px 0 4px}
+.reset-note svg{width:13px;height:13px;fill:var(--sub)}
 
-  @keyframes orbFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(40px, -50px) scale(1.15); }
-    50% { transform: translate(-30px, 40px) scale(0.9); }
-    75% { transform: translate(50px, 30px) scale(1.1); }
-  }
+/* صفحة المخططات الكاملة */
+.page{position:fixed;inset:0;z-index:300;background:radial-gradient(90% 70% at 85% 8%,rgba(23,138,94,.20),transparent 60%),radial-gradient(80% 60% at 8% 92%,rgba(217,169,46,.28),transparent 60%),linear-gradient(160deg,#f7f4ea 0%,#eef0e2 45%,#d7ead9 100%);transform:translateX(-100%);transition:transform .45s cubic-bezier(.32,.72,0,1);display:flex;flex-direction:column}
+.page.open{transform:translateX(0)}
+.page-head{display:flex;align-items:center;gap:12px;padding:calc(14px + env(safe-area-inset-top)) 18px 12px;flex-shrink:0}
+.back{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.7);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 16px rgba(23,84,58,.10)}
+.back svg{width:20px;height:20px;fill:#178a5e}
+.page-head b{font-size:19px;font-weight:900}
+.ph-sub{font-size:10px;color:var(--sub);font-weight:700;display:block}
+.page-tabs{display:flex;gap:8px;padding:0 18px 12px;flex-shrink:0;overflow-x:auto}
+.ptab{padding:9px 16px;border-radius:99px;background:rgba(255,255,255,.6);border:1px solid var(--brd);font-weight:800;font-size:12.5px;color:#33503f;cursor:pointer;font-family:inherit;white-space:nowrap;transition:.25s}
+.ptab.active{background:linear-gradient(135deg,var(--g2),var(--g1));color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(14,107,71,.3)}
+.page-body{flex:1;overflow-y:auto;padding:0 18px calc(30px + env(safe-area-inset-bottom))}
+.pg-sec{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--brd);border-radius:20px;padding:16px;margin-bottom:14px}
+.pg-sec h3{font-size:15px;font-weight:900;margin-bottom:12px;display:flex;gap:8px;align-items:center}
+.pg-sec h3 svg{width:18px;height:18px;fill:#178a5e}
+.pg-canvas{width:100%;height:210px;display:block;background:#fff;border:1px solid #eeece0;border-radius:14px}
+.pg-sum{display:flex;gap:9px;margin-top:12px}
+.pg-sum>div{flex:1;background:#e4efe7;border-radius:13px;padding:10px;text-align:center}
+.pg-sum b{font-size:19px;font-weight:900;color:var(--g1);display:block}
+.pg-sum span{font-size:10px;color:var(--sub);font-weight:700}
+.mtrack{position:relative;height:28px;border-radius:9px;background:#eef0e6;overflow:hidden;direction:ltr;margin:8px 0}
+.mseg{position:absolute;top:3px;bottom:3px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:800;overflow:hidden}
+.mchips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.mchip{font-size:10px;font-weight:800;padding:4px 9px;border-radius:99px;display:flex;align-items:center;gap:4px}
+.mchip svg{width:11px;height:11px;fill:currentColor}
+.pg-day{background:#fff;border:1px solid #eeece0;border-radius:16px;padding:13px;margin-bottom:10px}
+.pg-day>b{font-size:13.5px;font-weight:900;display:block;margin-bottom:4px}
+.pg-day>span{font-size:10.5px;color:var(--sub);font-weight:700}
+.pdots{display:flex;gap:6px;margin-top:10px}
+.pdot{flex:1;text-align:center;font-size:9px;font-weight:800;color:var(--sub)}
+.pdot i{display:block;height:30px;border-radius:9px;background:#e9efe9;margin-bottom:4px;position:relative;transition:.3s}
+.pdot.on i{background:linear-gradient(135deg,var(--pr1),var(--pr2))}
+.pdot.on{color:var(--pr2)}
+.pdot i svg{width:14px;height:14px;fill:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.empty-pg{text-align:center;padding:40px 0;color:var(--sub);font-weight:700;font-size:13px}
 
-  .app { position: relative; z-index: 1; width: 100%; min-height: 100vh; min-height: 100dvh; padding: 16px; display: flex; flex-direction: column; }
-
-  .header { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 16px; }
-
-  .app-title {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 28px; font-weight: 800; letter-spacing: -0.5px;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-  .app-title svg { width: 32px; height: 32px; flex-shrink: 0; }
-
-  @media (max-width: 380px) { .app-title { font-size: 24px; } .app-title svg { width: 28px; height: 28px; } }
-
-  .header-actions { display: flex; gap: 8px; }
-
-  .icon-btn {
-    width: 44px; height: 44px; border-radius: 50%; border: none;
-    background: var(--card); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border); color: var(--text);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: all 0.25s; box-shadow: var(--shadow);
-  }
-  .icon-btn:active { transform: scale(0.92); background: var(--divider); }
-  .icon-btn svg { width: 22px; height: 22px; }
-
-  /* === الشاشة الرئيسية === */
-  .screen-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px 0; }
-
-  .main-screen-box {
-    width: 100%; max-width: 500px;
-    background: var(--card); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-    border: 1px solid var(--card-border); border-radius: 36px;
-    box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
-    animation: screenIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    max-height: 85vh; display: flex; flex-direction: column;
-  }
-
-  @keyframes screenIn { from { opacity: 0; transform: scale(0.92) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-
-  .screen-scroll { flex: 1; overflow-y: auto; padding: 28px 24px 24px; -webkit-overflow-scrolling: touch; }
-  .screen-scroll::-webkit-scrollbar { width: 0; }
-
-  .screen-icon-wrap { text-align: center; margin-bottom: 20px; }
-
-  .screen-icon {
-    width: 80px; height: 80px;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    border-radius: 24px; display: inline-flex; align-items: center; justify-content: center;
-    box-shadow: 0 12px 40px rgba(255,45,85,0.3);
-    animation: iconPulse 2s ease-in-out infinite;
-  }
-  @keyframes iconPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
-  .screen-icon svg { width: 44px; height: 44px; color: white; }
-
-  .screen-title { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 4px; }
-  .screen-desc { font-size: 14px; color: var(--text2); text-align: center; margin-bottom: 24px; }
-
-  /* === حقول الإدخال === */
-  .person-section { margin-bottom: 20px; }
-
-  .person-header {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 16px; font-weight: 700; color: var(--text);
-    margin-bottom: 12px; padding-bottom: 8px;
-    border-bottom: 2px solid var(--divider);
-  }
-
-  .person-header .avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .person-header .avatar svg { width: 20px; height: 20px; color: white; }
-  .avatar.male { background: linear-gradient(135deg, var(--blue), #5856D6); }
-  .avatar.female { background: linear-gradient(135deg, var(--pink), var(--purple)); }
-
-  .field-group { margin-bottom: 12px; }
-
-  .field-label {
-    font-size: 13px; font-weight: 700; color: var(--text2);
-    margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
-  }
-  .field-label svg { width: 16px; height: 16px; }
-
-  .input-wrap {
-    background: var(--divider); border-radius: var(--radius-sm);
-    overflow: hidden; transition: all 0.3s;
-    border: 2px solid transparent;
-  }
-  .input-wrap:focus-within { border-color: var(--pink); background: var(--pink-bg); }
-
-  .input-wrap input, .input-wrap select {
-    width: 100%; border: none; background: none;
-    padding: 14px 16px; font-family: inherit;
-    font-size: 16px; font-weight: 600; color: var(--text);
-    outline: none; appearance: none; -webkit-appearance: none;
-  }
-  .input-wrap input::placeholder { color: var(--text2); font-weight: 500; }
-  .input-wrap select { cursor: pointer; }
-
-  .date-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-
-  /* === زر الحساب === */
-  .calc-btn {
-    width: 100%; padding: 17px; border: none; border-radius: var(--radius-sm);
-    font-family: inherit; font-size: 18px; font-weight: 800;
-    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    color: white; box-shadow: 0 8px 28px rgba(255,45,85,0.35);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-top: 8px; position: relative; overflow: hidden;
-  }
-  .calc-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent); opacity: 0; transition: opacity 0.3s; }
-  .calc-btn:hover::before { opacity: 1; }
-  .calc-btn:active { transform: scale(0.97); }
-  .calc-btn svg { width: 24px; height: 24px; }
-
-  /* === شاشة النتيجة === */
-  .result-overlay {
-    position: fixed; inset: 0; z-index: 500;
-    background: var(--bg);
-    display: none; flex-direction: column; align-items: center;
-    animation: fadeIn 0.5s ease;
-    overflow-y: auto; -webkit-overflow-scrolling: touch;
-  }
-  .result-overlay.show { display: flex; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-  .result-content { width: 100%; max-width: 500px; padding: 20px 16px 40px; }
-
-  .result-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 8px 0 20px;
-  }
-
-  .result-back {
-    width: 44px; height: 44px; border-radius: 50%; border: none;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    color: white; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; box-shadow: 0 4px 16px rgba(255,45,85,0.3);
-    transition: all 0.25s;
-  }
-  .result-back:active { transform: scale(0.9); }
-  .result-back svg { width: 22px; height: 22px; }
-
-  .result-share {
-    width: 44px; height: 44px; border-radius: 50%; border: none;
-    background: var(--card); border: 1px solid var(--card-border);
-    color: var(--text); display: flex; align-items: center; justify-content: center;
-    cursor: pointer; box-shadow: var(--shadow); transition: all 0.25s;
-  }
-  .result-share:active { transform: scale(0.9); }
-  .result-share svg { width: 20px; height: 20px; }
-
-  /* نسبة الحب الدائرية */
-  .love-circle-wrap { text-align: center; margin: 20px 0 30px; }
-
-  .love-circle {
-    width: 220px; height: 220px; margin: 0 auto 20px;
-    position: relative; display: flex; align-items: center; justify-content: center;
-  }
-
-  .love-circle svg.ring { position: absolute; inset: 0; transform: rotate(-90deg); }
-
-  .love-circle .ring-bg { fill: none; stroke: var(--divider); stroke-width: 10; }
-  .love-circle .ring-fill {
-    fill: none; stroke: url(#loveGrad); stroke-width: 10;
-    stroke-linecap: round; stroke-dasharray: 628; stroke-dashoffset: 628;
-    transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .love-percent { font-size: 56px; font-weight: 900; position: relative; z-index: 2; }
-  .love-percent span { font-size: 28px; font-weight: 700; }
-
-  .love-names {
-    font-size: 20px; font-weight: 800; margin-bottom: 6px;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-
-  .love-verdict { font-size: 16px; color: var(--text2); font-weight: 600; }
-
-  /* بطاقات التفاصيل */
-  .detail-card {
-    background: var(--card); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-    border: 1px solid var(--card-border); border-radius: var(--radius);
-    padding: 18px; margin-bottom: 12px; box-shadow: var(--shadow);
-    animation: cardUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-  }
-  .detail-card:nth-child(1) { animation-delay: 0.1s; }
-  .detail-card:nth-child(2) { animation-delay: 0.2s; }
-  .detail-card:nth-child(3) { animation-delay: 0.3s; }
-  .detail-card:nth-child(4) { animation-delay: 0.4s; }
-  .detail-card:nth-child(5) { animation-delay: 0.5s; }
-
-  @keyframes cardUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-  .detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-
-  .detail-icon {
-    width: 40px; height: 40px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .detail-icon svg { width: 20px; height: 20px; color: white; }
-  .detail-icon.pink { background: linear-gradient(135deg, var(--pink), var(--purple)); }
-  .detail-icon.blue { background: linear-gradient(135deg, var(--blue), #5856D6); }
-  .detail-icon.green { background: linear-gradient(135deg, var(--green), #30D158); }
-  .detail-icon.orange { background: linear-gradient(135deg, var(--orange), #FF6B00); }
-  .detail-icon.purple { background: linear-gradient(135deg, var(--purple), var(--pink)); }
-
-  .detail-title { font-size: 15px; font-weight: 700; color: var(--text); }
-  .detail-subtitle { font-size: 12px; color: var(--text2); }
-
-  .detail-bar { height: 8px; background: var(--divider); border-radius: 8px; overflow: hidden; margin-top: 4px; }
-  .detail-bar-fill {
-    height: 100%; border-radius: 8px;
-    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 0%;
-  }
-  .detail-bar-fill.pink { background: linear-gradient(90deg, var(--pink), var(--purple)); }
-  .detail-bar-fill.blue { background: linear-gradient(90deg, var(--blue), #5856D6); }
-  .detail-bar-fill.green { background: linear-gradient(90deg, var(--green), #30D158); }
-  .detail-bar-fill.orange { background: linear-gradient(90deg, var(--orange), #FF6B00); }
-
-  .detail-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--divider); }
-  .detail-row:last-child { border-bottom: none; }
-  .detail-row-label { font-size: 14px; color: var(--text2); font-weight: 500; }
-  .detail-row-value { font-size: 14px; color: var(--text); font-weight: 700; }
-
-  .zodiac-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 14px; border-radius: 20px;
-    font-size: 14px; font-weight: 700;
-    background: var(--pink-bg); color: var(--pink);
-  }
-
-  /* القلوب المتساقطة */
-  .hearts-container { position: fixed; inset: 0; pointer-events: none; z-index: 600; overflow: hidden; }
-  .falling-heart {
-    position: absolute; top: -40px;
-    animation: heartFall linear forwards;
-    font-size: 24px; opacity: 0.7;
-  }
-  @keyframes heartFall {
-    0% { transform: translateY(-40px) rotate(0deg); opacity: 0.8; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-  }
-
-  /* Toast */
-  .toast {
-    position: fixed; bottom: 40px; left: 50%;
-    transform: translateX(-50%) translateY(120px);
-    background: var(--text); color: var(--bg);
-    padding: 15px 30px; border-radius: 50px;
-    font-size: 15px; font-weight: 600;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    z-index: 9999; opacity: 0;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    white-space: nowrap; max-width: 90%;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  /* Modal الإعدادات */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.35s;
-  }
-  .modal-overlay.show { opacity: 1; pointer-events: auto; }
-
-  .modal-sheet {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    background: var(--modal-bg); border-radius: 28px 28px 0 0;
-    z-index: 1001; transform: translateY(100%);
-    transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
-    max-height: 90vh; overflow-y: auto;
-    box-shadow: 0 -12px 48px rgba(0,0,0,0.3);
-  }
-  .modal-sheet.show { transform: translateY(0); }
-
-  .modal-handle { width: 40px; height: 5px; background: var(--divider); border-radius: 3px; margin: 12px auto 0; }
-  .modal-header { padding: 18px 20px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--divider); }
-  .modal-title { font-size: 22px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
-  .modal-title svg { width: 24px; height: 24px; }
-  .modal-close { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--divider); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s; }
-  .modal-close:active { transform: scale(0.9); }
-  .modal-close svg { width: 18px; height: 18px; }
-  .modal-body { padding: 20px 20px 40px; }
-
-  .settings-section { margin-bottom: 28px; }
-  .settings-section-title { font-size: 13px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; padding: 0 4px; }
-  .settings-group { background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); overflow: hidden; }
-  .settings-item { padding: 15px 16px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid var(--divider); cursor: pointer; transition: background 0.2s; }
-  .settings-item:last-child { border-bottom: none; }
-  .settings-item:active { background: var(--divider); }
-  .settings-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .settings-icon svg { width: 18px; height: 18px; color: white; }
-  .settings-icon.pink { background: var(--pink); }
-  .settings-icon.purple { background: var(--purple); }
-  .settings-icon.blue { background: var(--blue); }
-  .settings-icon.green { background: var(--green); }
-  .settings-icon.orange { background: var(--orange); }
-  .settings-content { flex: 1; min-width: 0; }
-  .settings-label { font-size: 15px; font-weight: 600; color: var(--text); }
-  .settings-desc { font-size: 12px; color: var(--text2); margin-top: 2px; }
-  .settings-value { font-size: 14px; color: var(--text2); font-weight: 500; }
-
-  .toggle { position: relative; width: 51px; height: 31px; background: var(--divider); border-radius: 31px; cursor: pointer; transition: background 0.3s; flex-shrink: 0; }
-  .toggle::after { content: ''; position: absolute; top: 2px; right: 2px; width: 27px; height: 27px; background: white; border-radius: 50%; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
-  .toggle.active { background: var(--green); }
-  .toggle.active::after { transform: translateX(-20px); }
-
-  .about-card { background: linear-gradient(135deg, var(--pink), var(--purple)); border-radius: var(--radius); padding: 28px 20px; color: white; text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; }
-  .about-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(255,255,255,0.25), transparent 60%); }
-  .about-logo { margin-bottom: 12px; position: relative; }
-  .about-logo svg { width: 56px; height: 56px; }
-  .about-name { font-size: 24px; font-weight: 800; margin-bottom: 6px; position: relative; }
-  .about-tagline { font-size: 14px; opacity: 0.95; position: relative; }
-
-  .dev-card { background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 24px 20px; text-align: center; }
-  .dev-avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--pink)); margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white; font-weight: 800; box-shadow: 0 6px 24px rgba(175,82,222,0.35); }
-  .dev-name { font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-  .dev-role { font-size: 14px; color: var(--text2); margin-bottom: 18px; }
-  .version-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-  .version-badge { padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; background: var(--divider); color: var(--text); }
-  .version-badge.primary { background: var(--pink-bg); color: var(--pink); }
-
-  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 50% { transform: translateX(10px); } 75% { transform: translateX(-5px); } }
-  .shake { animation: shake 0.5s ease; }
-
-  ::-webkit-scrollbar { width: 0; }
-
-  @supports (padding-top: env(safe-area-inset-top)) {
-    .toast { bottom: calc(env(safe-area-inset-bottom) + 30px); }
-  }
+.overlay{position:fixed;inset:0;background:rgba(18,42,30,.45);backdrop-filter:blur(5px);opacity:0;pointer-events:none;transition:.35s;z-index:100}
+.overlay.show{opacity:1;pointer-events:auto}
+.sheet{position:fixed;bottom:0;left:0;right:0;max-height:85vh;background:rgba(249,248,241,.97);backdrop-filter:blur(30px);border-radius:30px 30px 0 0;padding:20px;transform:translateY(100%);transition:.45s cubic-bezier(.32,.72,0,1);z-index:101;display:flex;flex-direction:column;box-shadow:0 -18px 50px rgba(23,84,58,.2)}
+.sheet.open{transform:translateY(0)}
+.sheet-handle{width:40px;height:4px;background:#d8d5c6;border-radius:2px;margin:0 auto 16px}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.sheet-head h2{font-size:21px;font-weight:900;color:#14532d}
+.close-btn{width:34px;height:34px;border-radius:50%;background:#e8e7dc;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.close-btn svg{width:17px;height:17px;fill:#4b6353}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.stat-box{background:#e4efe7;border-radius:15px;padding:13px;text-align:center}
+.stat-box b{font-size:24px;font-weight:900;display:block;color:var(--g1)}
+.stat-box span{font-size:11px;color:var(--sub);font-weight:700}
+.days-list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.day-card{background:#fff;border:1px solid #eeece0;border-radius:16px;padding:13px}
+.day-card.today{border-color:rgba(217,169,46,.6);background:#fffdf5}
+.day-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.day-date b{font-size:14px;font-weight:900}
+.day-date span{font-size:11px;color:var(--sub);font-weight:700;display:block}
+.day-badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{padding:4px 9px;border-radius:11px;font-size:11px;font-weight:800;display:flex;align-items:center;gap:4px}
+.badge svg{width:11px;height:11px;fill:currentColor}
+.badge.m{background:#e4efe7;color:#177a4c}.badge.a{background:#f7ecd2;color:#a97b12}.badge.t{background:linear-gradient(90deg,var(--g2),var(--gd2));color:#fff}.badge.s{background:rgba(91,108,255,.15);color:var(--sl1)}.badge.p{background:rgba(139,92,246,.15);color:var(--pr2)}.badge.w{background:rgba(220,53,69,.12);color:var(--rd)}
+.day-bar{height:5px;background:#e9efe9;border-radius:3px;overflow:hidden}
+.day-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--g2),var(--gd2));border-radius:3px}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:#fff;color:var(--g1);padding:13px 22px;border-radius:30px;font-weight:800;box-shadow:0 10px 30px rgba(23,84,58,.25);opacity:0;transition:.35s;z-index:400;display:flex;align-items:center;gap:9px;max-width:90vw;text-align:center;font-size:13px}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast svg{width:19px;height:19px;fill:#178a5e;flex-shrink:0}
+.toast.warn{color:#c0392b}.toast.warn svg{fill:var(--rd)}
+@media(max-width:640px){.subjects{grid-template-columns:1fr}.dial{width:132px;height:132px}.dial-num{font-size:30px}}
 </style>
 </head>
 <body>
-
-<div class="bg-orbs"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
-
 <div class="app">
   <div class="header">
-    <h1 class="app-title">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      نسبة الحب
-    </h1>
-    <div class="header-actions">
-      <button class="icon-btn" onclick="openSettings()" aria-label="الإعدادات">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      </button>
+    <div class="brand">
+      <div class="logo-badge"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z"/></svg></div>
+      <div class="logo-txt"><b>نظام الدراسة الصارم</b><span>دراسة · صلاة · وجبات · نوم</span></div>
+    </div>
+    <div class="btns">
+      <button class="icon-btn" id="resetBtn"><svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>
+      <button class="icon-btn" id="logBtn"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg></button>
     </div>
   </div>
 
-  <div class="screen-container">
-    <div class="main-screen-box">
-      <div class="screen-scroll">
-        <div class="screen-icon-wrap">
-          <div class="screen-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-          </div>
-        </div>
-        <div class="screen-title">احسب نسبة الحب</div>
-        <div class="screen-desc">أدخل البيانات واحصل على نسبة توافق حقيقية</div>
+  <div class="now-bar">
+    <div class="now-dot study" id="nowDot"></div>
+    <div class="now-txt"><b id="nowTitle">—</b><span id="nowSub">—</span></div>
+    <div class="now-time"><b id="nowClock">--:--</b><span id="nowDate">—</span></div>
+  </div>
 
-        <!-- الشخص الأول -->
-        <div class="person-section">
-          <div class="person-header">
-            <div class="avatar male"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-            الحبيب
-          </div>
-          <div class="field-group">
-            <div class="field-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>الاسم</div>
-            <div class="input-wrap"><input type="text" id="name1" placeholder="اسم الحبيب"></div>
-          </div>
-          <div class="field-group">
-            <div class="field-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>تاريخ الميلاد</div>
-            <div class="date-row">
-              <div class="input-wrap"><input type="number" id="d1" placeholder="اليوم" min="1" max="31"></div>
-              <div class="input-wrap"><input type="number" id="m1" placeholder="الشهر" min="1" max="12"></div>
-              <div class="input-wrap"><input type="number" id="y1" placeholder="السنة" min="1940" max="2010"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- الشخص الثاني -->
-        <div class="person-section">
-          <div class="person-header">
-            <div class="avatar female"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-            الحبيبة
-          </div>
-          <div class="field-group">
-            <div class="field-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>الاسم</div>
-            <div class="input-wrap"><input type="text" id="name2" placeholder="اسم الحبيبة"></div>
-          </div>
-          <div class="field-group">
-            <div class="field-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>تاريخ الميلاد</div>
-            <div class="date-row">
-              <div class="input-wrap"><input type="number" id="d2" placeholder="اليوم" min="1" max="31"></div>
-              <div class="input-wrap"><input type="number" id="m2" placeholder="الشهر" min="1" max="12"></div>
-              <div class="input-wrap"><input type="number" id="y2" placeholder="السنة" min="1940" max="2010"></div>
-            </div>
-          </div>
-        </div>
-
-        <button class="calc-btn" onclick="calculate()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-          احسب نسبة الحب
-        </button>
+  <div class="top-zone">
+    <div class="dial" id="dialBtn">
+      <svg class="ring" viewBox="0 0 200 200"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1f9d6a"/><stop offset="100%" stop-color="#d9a92e"/></linearGradient></defs><circle class="dial-bg" cx="100" cy="100" r="85"/><circle class="dial-fg" id="ringFg" cx="100" cy="100" r="85"/></svg>
+      <div class="dial-center"><div class="dial-num" id="totalNum">0</div><div class="dial-label">ساعة دراسة</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-head"><b>الجدول اليومي</b><span class="tl-chip" id="tlChip">—</span></div>
+      <div class="tl-track" id="tlTrack"><div class="tl-now" id="tlNow" style="left:0%"></div></div>
+      <div class="tl-ticks" id="tlTicks"></div>
+      <div class="tl-legend">
+        <span><i style="background:#1f9d6a"></i>دراسة</span><span><i style="background:#e7bc45"></i>راحة قصيرة</span><span><i style="background:#c99a1f"></i>راحة طويلة</span><span><i style="background:#38bdf8"></i>وقت حر</span><span><i style="background:#764ba2"></i>نوم</span>
       </div>
     </div>
   </div>
+
+  <div class="subjects">
+    <div class="card"><div class="card-head"><div class="card-icon math"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div><div class="card-title"><h3>الرياضيات</h3><span>أنجز ساعاتك</span></div><div class="card-count" id="mathCount">0/4</div></div><div class="card-bar math"><i id="mathBar"></i></div><div class="hours" id="mathHours"></div></div>
+    <div class="card"><div class="card-head"><div class="card-icon arabic"><svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg></div><div class="card-title"><h3>اللغة العربية</h3><span>أنجز ساعاتك</span></div><div class="card-count" id="arabicCount">0/4</div></div><div class="card-bar arabic"><i id="arabicBar"></i></div><div class="hours" id="arabicHours"></div></div>
+    <div class="card"><div class="card-head"><div class="card-icon prayer"><svg viewBox="0 0 24 24"><path d="M12 2c-.8 2.5-4 3.8-4 6.5h8C16 5.8 12.8 4.5 12 2zM4 22v-8h2V9l2 2v3h8v-3l2-2v5h2v8H4zm6 0h4v-3c0-1.1-.9-2-2-2s-2 .9-2 2v3z"/></svg></div><div class="card-title"><h3>الصلوات</h3><span>صلوات اليوم</span></div><div class="card-count" id="prayerCount">0/5</div></div><div class="card-bar prayer"><i id="prayerBar"></i></div><div class="hours" id="prayerHours"></div></div>
+  </div>
+
+  <div class="sleep-mon locked" id="sleepMon">
+    <div class="sm-top">
+      <div class="sm-icon"><svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg></div>
+      <div class="sm-txt"><b id="smTitle">نظام النوم الصارم</b><span id="smSub">أكمل 8 ساعات دراسة لتنام (10:30م–7ص)</span></div>
+      <div class="sm-status" id="smStatus">مقفل</div>
+    </div>
+    <div class="sm-bar"><i id="smBar" style="width:0%"></i></div>
+    <div class="sm-controls">
+      <div class="sm-time" id="smStudyTime">0h<small>الدراسة</small></div>
+      <div class="sm-time" id="smSleepTime">—<small>وقت النوم</small></div>
+      <div class="sm-time" id="smWakeTime">—<small>الاستيقاظ</small></div>
+      <button class="sm-btn sm-sleep" id="sleepBtn" disabled><svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>نمت</button>
+      <button class="sm-btn sm-wake" id="wakeBtn" style="display:none"><svg viewBox="0 0 24 24"><path d="M12 7V3m0 18v-4m9-5h-4M7 12H3m13.5-6.5L14 8m-4 8l-2.5 2.5m9 0L14 16m-4-8L7.5 5.5M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>صحيت</button>
+      <button class="sm-btn sm-chart" id="chartBtn"><svg viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></svg>المخطط</button>
+    </div>
+    <div class="sm-divider"><span>الوجبات اليومية</span></div>
+    <div class="meals-row" id="mealsRow"></div>
+    <div class="waste-row">
+      <button class="sm-btn sm-waste" id="wasteBtn"><svg viewBox="0 0 24 24"><path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z"/></svg><span id="wasteLbl">وقت ضائع</span></button>
+      <div class="sm-time" id="wasteTime">0د<small>الوقت الضائع اليوم</small></div>
+    </div>
+  </div>
+  <div class="reset-note"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> تصفير تلقائي كل يوم الساعة 2:00 صباحاً</div>
 </div>
 
-<!-- شاشة النتيجة -->
-<div class="result-overlay" id="resultOverlay">
-  <div class="hearts-container" id="heartsContainer"></div>
-  <div class="result-content">
-    <div class="result-header">
-      <button class="result-back" onclick="backToMain()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
-      <span style="font-size:18px;font-weight:800;">النتيجة</span>
-      <button class="result-share" onclick="shareResult()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
-    </div>
-
-    <!-- الدائرة الرئيسية -->
-    <div class="love-circle-wrap">
-      <div class="love-circle">
-        <svg class="ring" viewBox="0 0 220 220">
-          <defs><linearGradient id="loveGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF2D55"/><stop offset="100%" stop-color="#AF52DE"/></linearGradient></defs>
-          <circle class="ring-bg" cx="110" cy="110" r="100"/>
-          <circle class="ring-fill" id="ringFill" cx="110" cy="110" r="100"/>
-        </svg>
-        <div class="love-percent" id="percentText">0<span>%</span></div>
-      </div>
-      <div class="love-names" id="loveNames"></div>
-      <div class="love-verdict" id="loveVerdict"></div>
-    </div>
-
-    <!-- التفاصيل -->
-    <div id="detailsContainer"></div>
+<!-- صفحة المخططات الكاملة -->
+<div class="page" id="chartPage">
+  <div class="page-head">
+    <button class="back" id="backBtn"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
+    <div><b>المخططات والإحصائيات</b><span class="ph-sub">صفحة كاملة لمتابعة تقدمك</span></div>
   </div>
+  <div class="page-tabs">
+    <button class="ptab active" data-t="sleep">النوم</button>
+    <button class="ptab" data-t="meals">الوجبات</button>
+    <button class="ptab" data-t="prayer">الصلاة</button>
+    <button class="ptab" data-t="waste">الوقت الضائع</button>
+  </div>
+  <div class="page-body" id="pageBody"></div>
 </div>
 
-<!-- Modal الإعدادات -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeSettings()"></div>
-<div class="modal-sheet" id="modalSheet">
-  <div class="modal-handle"></div>
-  <div class="modal-header">
-    <h2 class="modal-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>الإعدادات</h2>
-    <button class="modal-close" onclick="closeSettings()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-  </div>
-  <div class="modal-body">
-    <div class="about-card">
-      <div class="about-logo"><svg viewBox="0 0 24 24" fill="currentColor" width="56" height="56"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
-      <div class="about-name">نسبة الحب</div>
-      <div class="about-tagline">اكتشف نسبة التوافق الفلكي والروحي</div>
-    </div>
-    <div class="settings-section">
-      <div class="settings-section-title">المظهر</div>
-      <div class="settings-group">
-        <div class="settings-item" onclick="toggleDark()">
-          <div class="settings-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-          <div class="settings-content"><div class="settings-label">الوضع الداكن</div><div class="settings-desc">تبديل بين المظهر الفاتح والداكن</div></div>
-          <div class="toggle" id="darkToggle"></div>
-        </div>
-      </div>
-    </div>
-    <div class="settings-section">
-      <div class="settings-section-title">المطور</div>
-      <div class="dev-card">
-        <div class="dev-avatar">م</div>
-        <div class="dev-name">مروة</div>
-        <div class="dev-role">مطورة التطبيق</div>
-        <div class="version-row"><span class="version-badge primary">الإصدار 0.0.1V</span><span class="version-badge">النسخة الأولى</span></div>
-      </div>
-    </div>
-    <div class="settings-section">
-      <div class="settings-section-title">حول التطبيق</div>
-      <div class="settings-group">
-        <div class="settings-item" onclick="showToast('💕 حساب نسبة الحب بناءً على الأبراج والأسماء')">
-          <div class="settings-icon pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
-          <div class="settings-content"><div class="settings-label">حول التطبيق</div><div class="settings-desc">معلومات إضافية</div></div>
-          <div class="settings-value">›</div>
-        </div>
-        <div class="settings-item" onclick="showToast('✨ توافق فلكي + رقم الحظ + تحليل الأسماء')">
-          <div class="settings-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <div class="settings-content"><div class="settings-label">طريقة الحساب</div><div class="settings-desc">العوامل المستخدمة</div></div>
-          <div class="settings-value">فلكي</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="overlay" id="overlay"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-head"><h2>سجل الإنجاز</h2><button class="close-btn" id="closeSheet"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div>
+  <div class="stats-row"><div class="stat-box"><b id="stTotal">0</b><span>إجمالي الساعات</span></div><div class="stat-box"><b id="stDays">0</b><span>أيام الإنجاز</span></div><div class="stat-box"><b id="stStreak">0</b><span>أيام متتالية</span></div></div>
+  <div class="days-list" id="daysList"></div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-// === الأبراج ===
-const ZODIACS = [
-  { name: 'الجدي', icon: '♑', start: [1,1], end: [1,19] },
-  { name: 'الدلو', icon: '♒', start: [1,20], end: [2,18] },
-  { name: 'الحوت', icon: '♓', start: [2,19], end: [3,20] },
-  { name: 'الحمل', icon: '♈', start: [3,21], end: [4,19] },
-  { name: 'الثور', icon: '♉', start: [4,20], end: [5,20] },
-  { name: 'الجوزاء', icon: '♊', start: [5,21], end: [6,20] },
-  { name: 'السرطان', icon: '♋', start: [6,21], end: [7,22] },
-  { name: 'الأسد', icon: '♌', start: [7,23], end: [8,22] },
-  { name: 'العذراء', icon: '♍', start: [8,23], end: [9,22] },
-  { name: 'الميزان', icon: '♎', start: [9,23], end: [10,22] },
-  { name: 'العقرب', icon: '♏', start: [10,23], end: [11,21] },
-  { name: 'القوس', icon: '♐', start: [11,22], end: [12,21] },
-  { name: 'الجدي', icon: '♑', start: [12,22], end: [12,31] }
+(function(){
+const KEY='study_pro_v4',NAMES=['الأولى','الثانية','الثالثة','الرابعة'],REQ_STUDY=8,RESET_H=2;
+const PRAYERS=[['fajr','الفجر'],['dhuhr','الظهر'],['asr','العصر'],['maghrib','المغرب'],['isha','العشاء']];
+const MEALS=[['breakfast','الفطور','#e7bc45'],['lunch','الغداء','#1f9d6a'],['dinner','العشاء','#8b5cf6']];
+const SCHEDULE=[
+ {s:420,e:540,type:'study',label:'دراسة',name:'الجلسة 1'},
+ {s:540,e:570,type:'breakS',label:'',name:'راحة قصيرة'},
+ {s:570,e:690,type:'study',label:'دراسة',name:'الجلسة 2'},
+ {s:690,e:750,type:'breakL',label:'راحة طويلة',name:'راحة طويلة'},
+ {s:750,e:870,type:'study',label:'دراسة',name:'الجلسة 3'},
+ {s:870,e:900,type:'breakS',label:'',name:'راحة قصيرة'},
+ {s:900,e:1020,type:'study',label:'دراسة',name:'الجلسة 4'},
+ {s:1020,e:1320,type:'free',label:'وقت حر ومراجعة',name:'وقت حر ومراجعة'},
+ {s:1320,e:1350,type:'wind',label:'تهيئة',name:'تهيئة للنوم'},
+ {s:1350,e:420,type:'sleep',label:'نوم 10:30م – 7ص',name:'النوم'}
 ];
+const TICKS=[{m:420,l:'7ص'},{m:720,l:'12ظ'},{m:1020,l:'5م'},{m:1320,l:'10م'},{m:1350,l:'10:30م'}];
+const ICONS={clock:'<svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>',check:'<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',calc:'<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>',book:'<svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>',bolt:'<svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>',star:'<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>',warn:'<svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>',bed:'<svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>',meal:'<svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>',mosque:'<svg viewBox="0 0 24 24"><path d="M12 2c-.8 2.5-4 3.8-4 6.5h8C16 5.8 12.8 4.5 12 2zM4 22v-8h2V9l2 2v3h8v-3l2-2v5h2v8H4zm6 0h4v-3c0-1.1-.9-2-2-2s-2 .9-2 2v3z"/></svg>',hour:'<svg viewBox="0 0 24 24"><path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z"/></svg>'};
+const C=2*Math.PI*85;
+let store=JSON.parse(localStorage.getItem(KEY))||{days:{},sleep:{},meals:{},prayers:{},waste:{}};
+['sleep','meals','prayers','waste'].forEach(k=>{if(!store[k])store[k]={}});
+let curKey=dayKey(),celebrated=null,tTimer,curTab='sleep';
 
-// توافق الأبراج (كل برج مع الأبراج الأخرى من 0-100)
-const COMPAT = {
-  'الحمل': {'الحمل':85,'الثور':65,'الجوزاء':90,'السرطان':55,'الأسد':95,'العذراء':50,'الميزان':75,'العقرب':60,'القوس':92,'الجدي':55,'الدلو':88,'الحوت':60},
-  'الثور': {'الحمل':65,'الثور':88,'الجوزاء':55,'السرطان':90,'الأسد':70,'العذراء':92,'الميزان':68,'العقرب':85,'القوس':50,'الجدي':93,'الدلو':52,'الحوت':87},
-  'الجوزاء': {'الحمل':90,'الثور':55,'الجوزاء':82,'السرطان':50,'الأسد':88,'العذراء':55,'الميزان':93,'العقرب':48,'القوس':85,'الجدي':50,'الدلو':95,'الحوت':52},
-  'السرطان': {'الحمل':55,'الثور':90,'الجوزاء':50,'السرطان':85,'الأسد':58,'العذراء':72,'الميزان':52,'العقرب':92,'القوس':48,'الجدي':80,'الدلو':45,'الحوت':95},
-  'الأسد': {'الحمل':95,'الثور':70,'الجوزاء':88,'السرطان':58,'الأسد':85,'العذراء':55,'الميزان':82,'العقرب':65,'القوس':93,'الجدي':52,'الدلو':78,'الحوت':55},
-  'العذراء': {'الحمل':50,'الثور':92,'الجوزاء':55,'السرطان':72,'الأسد':55,'العذراء':80,'الميزان':65,'العقرب':88,'القوس':52,'الجدي':90,'الدلو':55,'الحوت':75},
-  'الميزان': {'الحمل':75,'الثور':68,'الجوزاء':93,'السرطان':52,'الأسد':82,'العذراء':65,'الميزان':80,'العقرب':60,'القوس':78,'الجدي':58,'الدلو':90,'الحوت':62},
-  'العقرب': {'الحمل':60,'الثور':85,'الجوزاء':48,'السرطان':92,'الأسد':65,'العذراء':88,'الميزان':60,'العقرب':82,'القوس':52,'الجدي':78,'الدلو':48,'الحوت':93},
-  'القوس': {'الحمل':92,'الثور':50,'الجوزاء':85,'السرطان':48,'الأسد':93,'العذراء':52,'الميزان':78,'العقرب':52,'القوس':85,'الجدي':58,'الدلو':88,'الحوت':55},
-  'الجدي': {'الحمل':55,'الثور':93,'الجوزاء':50,'السرطان':80,'الأسد':52,'العذراء':90,'الميزان':58,'العقرب':78,'القوس':58,'الجدي':82,'الدلو':55,'الحوت':72},
-  'الدلو': {'الحمل':88,'الثور':52,'الجوزاء':95,'السرطان':45,'الأسد':78,'العذراء':55,'الميزان':90,'العقرب':48,'القوس':88,'الجدي':55,'الدلو':82,'الحوت':58},
-  'الحوت': {'الحمل':60,'الثور':87,'الجوزاء':52,'السرطان':95,'الأسد':55,'العذراء':75,'الميزان':62,'العقرب':93,'القوس':55,'الجدي':72,'الدلو':58,'الحوت':85}
+function fmt(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function dayKey(){return fmt(new Date(Date.now()-RESET_H*3600000))}
+function empty(){return{math:[0,0,0,0],arabic:[0,0,0,0]}}
+function hours(a){return a?a.filter(Boolean).length:0}
+function getDay(k){return store.days[k]||empty()}
+function setDay(k){if(!store.days[k])store.days[k]=empty();return store.days[k]}
+function save(){localStorage.setItem(KEY,JSON.stringify(store))}
+function timeStr(ts){return ts?new Date(ts).toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'}):'—'}
+function studyDone(){const d=getDay(curKey);return hours(d.math)+hours(d.arabic)}
+function canSleep(){return studyDone()>=REQ_STUDY}
+function isSleeping(){const s=store.sleep[curKey];return !!(s&&s.sleepAt&&!s.wakeAt)}
+function sleptHours(k){const s=store.sleep[k];return (s&&s.sleepAt&&s.wakeAt)?Math.max(0,(s.wakeAt-s.sleepAt)/3600000):0}
+function nowMin(){const d=new Date();return d.getHours()*60+d.getMinutes()}
+function dur(m){const h=Math.floor(m/60),mm=m%60;return h&&mm?h+'س و'+mm+'د':h?h+' ساعات':mm+' دقيقة'}
+function segDur(s){return (s.e-s.s+1440)%1440}
+function activeSeg(){const m=nowMin();for(const s of SCHEDULE){const end=s.e>s.s?s.e:s.e+1440,cur=m>=s.s?m:m+1440;if(cur>=s.s&&cur<end)return s}return SCHEDULE[SCHEDULE.length-1]}
+function prayerCount(k){const p=store.prayers[k]||{};return PRAYERS.filter(([key])=>p[key]).length}
+function wasteMin(k){const w=store.waste[k];if(!w)return 0;let t=w.total||0;if(w.run)t+=Date.now()-w.run;return Math.round(t/60000)}
+function dLabel(k){const d=new Date(+k.slice(0,4),+k.slice(5,7)-1,+k.slice(8,10));return d.getDate()+'/'+(d.getMonth()+1)}
+function keysAsc(o){return Object.keys(o).sort()}
+
+/* بناء الجدول */
+(function(){const tr=document.getElementById('tlTrack'),now=document.getElementById('tlNow');
+ SCHEDULE.forEach((s,i)=>{const d=document.createElement('div');d.className='tl-seg tl-'+s.type;d.style.flex=segDur(s);d.textContent=s.label;d.dataset.i=i;tr.insertBefore(d,now)});
+ const tk=document.getElementById('tlTicks');TICKS.forEach(t=>{const sp=document.createElement('span');sp.style.left=((t.m-420+1440)%1440)/1440*100+'%';sp.textContent=t.l;tk.appendChild(sp)})})();
+
+/* صفوف المواد والصلاة */
+['math','arabic'].forEach(s=>{const w=document.getElementById(s+'Hours');for(let i=0;i<4;i++){const d=document.createElement('div');d.className='hour-item';d.innerHTML=`<div class="hour-info">${ICONS.clock}<div class="hour-text"><b>${i+1}h</b><span>الساعة ${NAMES[i]}</span></div></div><div class="check-circle">${ICONS.check}</div>`;d.onclick=()=>toggle(s,i);w.appendChild(d)}});
+PRAYERS.forEach(([key,name])=>{const d=document.createElement('div');d.className='hour-item p-item';d.innerHTML=`<div class="hour-info">${ICONS.mosque}<div class="hour-text"><b>صلاة ${name}</b><span>أدّيت؟</span></div></div><div class="check-circle">${ICONS.check}</div>`;d.onclick=()=>togglePrayer(key);document.getElementById('prayerHours').appendChild(d)});
+
+/* الوجبات */
+MEALS.forEach(([key,name])=>{const b=document.createElement('button');b.className='meal-btn';b.dataset.m=key;b.innerHTML=ICONS.meal+`<b>${name}</b><span>—</span>`;b.onclick=()=>tapMeal(key,name);document.getElementById('mealsRow').appendChild(b)});
+function tapMeal(key,name){
+  const ms=store.meals[curKey]||(store.meals[curKey]={});
+  const m=ms[key]||(ms[key]={});
+  if(!m.start){m.start=Date.now();toast('🍽 بدأت '+name+' — بالهناء',ICONS.meal)}
+  else if(!m.end){m.end=Date.now();toast('✓ انتهت '+name+' · '+dur(Math.round((m.end-m.start)/60000)),ICONS.meal)}
+  save();renderMeals();
+}
+function renderMeals(){
+  const ms=store.meals[curKey]||{};
+  document.querySelectorAll('.meal-btn').forEach(b=>{
+    const m=ms[b.dataset.m]||{},sp=b.querySelector('span');
+    b.classList.toggle('eating',!!m.start&&!m.end);b.classList.toggle('done',!!m.end);
+    sp.textContent=!m.start?'اضغط للبداية':!m.end?'بدأ '+timeStr(m.start):timeStr(m.start)+'–'+timeStr(m.end);
+  });
+}
+
+/* الوقت الضائع */
+document.getElementById('wasteBtn').onclick=()=>{
+  const w=store.waste[curKey]||(store.waste[curKey]={total:0,run:null});
+  if(!w.run){w.run=Date.now();toast('⏳ بدأ حساب الوقت الضائع',ICONS.hour)}
+  else{w.total+=(Date.now()-w.run);w.run=null;toast('✓ توقف — ضاع '+dur(Math.round(w.total/60000)),ICONS.hour,true)}
+  save();renderWaste();
 };
+function renderWaste(){
+  const w=store.waste[curKey]||{total:0,run:null},running=!!w.run;
+  document.getElementById('wasteBtn').classList.toggle('running',running);
+  document.getElementById('wasteLbl').textContent=running?'إيقاف وحفظ':'وقت ضائع';
+  document.getElementById('wasteTime').innerHTML=dur(wasteMin(curKey))+'<small>الوقت الضائع اليوم</small>';
+}
 
-function getZodiac(day, month) {
-  for (let z of ZODIACS) {
-    const afterStart = month > z.start[0] || (month === z.start[0] && day >= z.start[1]);
-    const beforeEnd = month < z.end[0] || (month === z.end[0] && day <= z.end[1]);
-    if (afterStart && beforeEnd) return z;
+function toggle(s,i){const d=setDay(curKey);d[s][i]=d[s][i]?0:1;save();if(navigator.vibrate)navigator.vibrate(10);
+ const h=hours(d[s]);if(h===4)toast(`أنجزت ${s==='math'?'الرياضيات':'العربي'} بالكامل`,ICONS.star);
+ const tot=studyDone();if(tot===8&&celebrated!==curKey){celebrated=curKey;toast('🎉 أكملت 8 ساعات! الآن تقدر تنام',ICONS.star)}render()}
+function togglePrayer(key){const p=store.prayers[curKey]||(store.prayers[curKey]={});p[key]=!p[key];save();
+ if(p[key]&&prayerCount(curKey)===5)toast('🕌 أكملت صلوات اليوم الخمس',ICONS.mosque);render()}
+
+document.getElementById('sleepBtn').onclick=()=>{
+  if(!canSleep()){toast('⛔ ممنوع! أكمل 8 ساعات دراسة أولاً',ICONS.warn,true);return}
+  if(isSleeping())return;
+  const s=store.sleep[curKey]||(store.sleep[curKey]={});s.sleepAt=Date.now();s.wakeAt=null;save();render();toast('💤 تم تسجيل النوم',ICONS.bed)};
+document.getElementById('wakeBtn').onclick=()=>{const s=store.sleep[curKey];if(!s||!s.sleepAt)return;s.wakeAt=Date.now();save();render();toast(`☀️ صحيت! نمت ${sleptHours(curKey).toFixed(1)} ساعة`,ICONS.star)};
+
+function renderSleep(){
+  const s=store.sleep[curKey]||{},sleeping=isSleeping(),done=studyDone(),ok=canSleep();
+  const mon=document.getElementById('sleepMon'),btn=document.getElementById('sleepBtn'),wb=document.getElementById('wakeBtn');
+  mon.classList.toggle('locked',!ok&&!sleeping);mon.classList.toggle('ready',ok&&!sleeping);mon.classList.toggle('asleep',sleeping);
+  document.getElementById('smStudyTime').innerHTML=done+'h<small>الدراسة</small>';
+  document.getElementById('smSleepTime').innerHTML=timeStr(s.sleepAt)+'<small>وقت النوم</small>';
+  document.getElementById('smWakeTime').innerHTML=timeStr(s.wakeAt)+'<small>الاستيقاظ</small>';
+  document.getElementById('smBar').style.width=Math.min(100,done/REQ_STUDY*100)+'%';
+  btn.disabled=!ok||sleeping;wb.style.display=sleeping?'flex':'none';btn.style.display=sleeping?'none':'flex';
+  const st=document.getElementById('smStatus'),tt=document.getElementById('smTitle'),sb=document.getElementById('smSub');
+  if(sleeping){st.textContent='💤 نائم';tt.textContent='أنت نائم الآن';sb.textContent='فترة النوم 10:30م – 7:00ص'}
+  else if(ok){st.textContent='✓ متاح';tt.textContent='أكملت الدراسة!';sb.textContent='درست '+done+' ساعات — تقدر تنام'}
+  else{st.textContent='⛔ مقفل';tt.textContent='النوم مقفل';sb.textContent='باقي '+(REQ_STUDY-done)+' ساعات دراسة لتنام'}
+}
+
+function renderNow(){
+  const m=nowMin(),seg=activeSeg(),dot=document.getElementById('nowDot');
+  document.getElementById('nowClock').textContent=new Date().toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('nowDate').textContent=new Date().toLocaleDateString('ar',{weekday:'long',day:'numeric',month:'long'});
+  const end=seg.e>seg.s?seg.e:seg.e+1440,cur=m>=seg.s?m:m+1440,rem=end-cur;
+  if(isSleeping()||seg.type==='sleep'){dot.className='now-dot sleep';document.getElementById('nowTitle').textContent='وقت النوم';document.getElementById('nowSub').textContent='الاستيقاظ 7:00ص · باقي '+dur(rem)}
+  else{dot.className='now-dot '+(seg.type==='study'?'study':seg.type==='free'?'free':'break');
+    document.getElementById('nowTitle').textContent=seg.name;document.getElementById('nowSub').textContent='ينتهي خلال '+dur(rem)}
+  document.getElementById('tlChip').textContent=seg.name+' · '+dur(rem);
+  document.getElementById('tlNow').style.left=((m-420+1440)%1440)/1440*100+'%';
+  document.querySelectorAll('.tl-seg').forEach(el=>el.classList.toggle('active',+el.dataset.i===SCHEDULE.indexOf(seg)));
+}
+
+function render(){
+  const d=getDay(curKey);let tot=0;
+  ['math','arabic'].forEach(s=>{const h=hours(d[s]);tot+=h;document.getElementById(s+'Count').textContent=h+'/4';document.getElementById(s+'Bar').style.width=h*25+'%';document.querySelectorAll(`#${s}Hours .hour-item`).forEach((el,i)=>el.classList.toggle('done',!!d[s][i]))});
+  const pc=prayerCount(curKey);
+  document.getElementById('prayerCount').textContent=pc+'/5';document.getElementById('prayerBar').style.width=pc*20+'%';
+  document.querySelectorAll('#prayerHours .hour-item').forEach((el,i)=>el.classList.toggle('done',!!(store.prayers[curKey]&&store.prayers[curKey][PRAYERS[i][0]])));
+  document.getElementById('totalNum').textContent=tot;
+  const ring=document.getElementById('ringFg');ring.style.strokeDasharray=C;ring.style.strokeDashoffset=C*(1-tot/8);
+  renderSleep();renderMeals();renderWaste();renderNow();
+}
+
+/* ===== صفحة المخططات ===== */
+function rtop(ctx,x,y,w,h,r){r=Math.min(r,w/2,Math.max(h,0));ctx.beginPath();ctx.moveTo(x,y+h);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h);ctx.closePath();ctx.fill()}
+function drawBars(cv,items,opt){
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  if(!items.length)return;
+  const pad={l:32,r:10,t:16,b:26},cw=W-pad.l-pad.r,ch=H-pad.t-pad.b,max=opt.max;
+  ctx.font='10px sans-serif';
+  for(let i=0;i<=5;i++){const y=pad.t+ch-ch*(i/5);ctx.strokeStyle='#e9efe9';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillStyle='#8aa093';ctx.textAlign='right';ctx.fillText(opt.axis(i*max/5),pad.l-6,y+3)}
+  if(opt.line){const y=pad.t+ch-ch*(opt.line.v/max);ctx.strokeStyle=opt.line.color;ctx.setLineDash([5,4]);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.setLineDash([])}
+  const gap=cw/items.length,bw=Math.min(38,gap*.62);
+  items.forEach((it,i)=>{const x=pad.l+gap*i+gap/2,bh=ch*Math.min(1,it.v/max),y=pad.t+ch-bh;
+    ctx.fillStyle=opt.colorFn?opt.colorFn(it):opt.color;rtop(ctx,x-bw/2,y,bw,bh,6);
+    ctx.fillStyle='#173f2c';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillText(opt.fmt(it.v),x,y-4);
+    ctx.fillStyle='#8aa093';ctx.font='9px sans-serif';ctx.fillText(it.x,x,H-9)});
+}
+function sec(t,icon,inner){return `<div class="pg-sec"><h3>${icon}${t}</h3>${inner}</div>`}
+function renderPage(t){
+  const B=document.getElementById('pageBody');
+  if(t==='sleep'){
+    const items=keysAsc(store.sleep).filter(k=>sleptHours(k)>0).map(k=>({x:dLabel(k),v:sleptHours(k)}));
+    const avg=items.length?items.reduce((a,b)=>a+b.v,0)/items.length:0;
+    B.innerHTML=sec('مخطط ساعات النوم',ICONS.bed,`<canvas id="cvS" class="pg-canvas" width="640" height="220"></canvas><div class="pg-sum"><div><b>${avg.toFixed(1)}</b><span>متوسط النوم</span></div><div><b>${items.length}</b><span>أيام مسجلة</span></div><div><b>8h</b><span>الهدف اليومي</span></div></div>`);
+    drawBars(document.getElementById('cvS'),items,{max:10,line:{v:8,color:'#1f9d6a'},colorFn:it=>it.v>=8?'#1f9d6a':'#764ba2',fmt:v=>v.toFixed(1),axis:v=>v.toFixed(0)});
   }
-  return ZODIACS[0];
-}
-
-function nameValue(name) {
-  let v = 0;
-  for (let c of name) v += c.charCodeAt(0);
-  return v;
-}
-
-function luckNumber(day, month, year) {
-  let s = day + month + year;
-  while (s > 9) { s = String(s).split('').reduce((a,b) => a + parseInt(b), 0); }
-  return s;
-}
-
-let lastResult = {};
-
-function calculate() {
-  const n1 = document.getElementById('name1').value.trim();
-  const n2 = document.getElementById('name2').value.trim();
-  const d1 = parseInt(document.getElementById('d1').value);
-  const m1 = parseInt(document.getElementById('m1').value);
-  const y1 = parseInt(document.getElementById('y1').value);
-  const d2 = parseInt(document.getElementById('d2').value);
-  const m2 = parseInt(document.getElementById('m2').value);
-  const y2 = parseInt(document.getElementById('y2').value);
-
-  if (!n1) { shakeEl('name1'); showToast('⚠️ أدخل اسم الحبيب'); return; }
-  if (!n2) { shakeEl('name2'); showToast('⚠️ أدخل اسم الحبيبة'); return; }
-  if (!d1||!m1||!y1) { showToast('⚠️ أدخل تاريخ ميلاد الحبيب'); return; }
-  if (!d2||!m2||!y2) { showToast('⚠️ أدخل تاريخ ميلاد الحبيبة'); return; }
-
-  // 1. توافق الأبراج
-  const z1 = getZodiac(d1, m1);
-  const z2 = getZodiac(d2, m2);
-  const zodiacCompat = COMPAT[z1.name]?.[z2.name] || 70;
-
-  // 2. تحليل الأسماء
-  const nv1 = nameValue(n1);
-  const nv2 = nameValue(n2);
-  const nameDiff = Math.abs(nv1 - nv2);
-  const nameScore = Math.max(40, 100 - (nameDiff % 60));
-
-  // 3. رقم الحظ
-  const luck1 = luckNumber(d1, m1, y1);
-  const luck2 = luckNumber(d2, m2, y2);
-  const luckDiff = Math.abs(luck1 - luck2);
-  const luckScore = luckDiff === 0 ? 95 : (luckDiff <= 3 ? 85 : (luckDiff <= 5 ? 70 : 55));
-
-  // 4. عنصر البرج
-  const elements = {'الحمل':'نار','الأسد':'نار','القوس':'نار','الثور':'تراب','العذراء':'تراب','الجدي':'تراب','الجوزاء':'هواء','الميزان':'هواء','الدلو':'هواء','السرطان':'ماء','العقرب':'ماء','الحوت':'ماء'};
-  const el1 = elements[z1.name], el2 = elements[z2.name];
-  const elemCompat = el1===el2 ? 90 : ((el1==='نار'&&el2==='هواء')||(el1==='هواء'&&el2==='نار')||(el1==='تراب'&&el2==='ماء')||(el1==='ماء'&&el2==='تراب') ? 85 : 60);
-
-  // 5. نسبة الحب النهائية
-  const totalScore = Math.round(zodiacCompat*0.35 + nameScore*0.25 + luckScore*0.2 + elemCompat*0.2);
-  const finalScore = Math.min(99, Math.max(35, totalScore));
-
-  lastResult = { n1, n2, z1, z2, zodiacCompat, nameScore, luckScore, elemCompat, finalScore, luck1, luck2, el1, el2 };
-
-  showResult(finalScore);
-}
-
-function showResult(score) {
-  const overlay = document.getElementById('resultOverlay');
-  overlay.classList.add('show');
-
-  document.getElementById('loveNames').textContent = lastResult.n1 + ' 💕 ' + lastResult.n2;
-
-  let verdict = '';
-  if (score >= 90) verdict = '💞 حب أسطوري!';
-  else if (score >= 80) verdict = '❤️ توافق رائع!';
-  else if (score >= 70) verdict = '💗 حب جميل!';
-  else if (score >= 60) verdict = '💛 توافق جيد';
-  else if (score >= 50) verdict = '🤍 يحتاج effort';
-  else verdict = '💔 توافق ضعيف';
-  document.getElementById('loveVerdict').textContent = verdict;
-
-  // أنيميشن الدائرة
-  const ring = document.getElementById('ringFill');
-  const circumference = 2 * Math.PI * 100;
-  ring.style.strokeDasharray = circumference;
-  ring.style.strokeDashoffset = circumference;
-  setTimeout(() => {
-    ring.style.strokeDashoffset = circumference - (circumference * score / 100);
-  }, 100);
-
-  // أنيميشن الرقم
-  let current = 0;
-  const percentEl = document.getElementById('percentText');
-  const interval = setInterval(() => {
-    current++;
-    percentEl.innerHTML = current + '<span>%</span>';
-    if (current >= score) clearInterval(interval);
-  }, 25);
-
-  // التفاصيل
-  document.getElementById('detailsContainer').innerHTML = `
-    <div class="detail-card">
-      <div class="detail-header">
-        <div class="detail-icon pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <div><div class="detail-title">توافق الأبراج</div><div class="detail-subtitle">${lastResult.z1.icon} ${lastResult.z1.name} × ${lastResult.z2.icon} ${lastResult.z2.name}</div></div>
-      </div>
-      <div class="detail-bar"><div class="detail-bar-fill pink" id="bar1"></div></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-header">
-        <div class="detail-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <div><div class="detail-title">تحليل الأسماء</div><div class="detail-subtitle">التردد الرقمي للحروف</div></div>
-      </div>
-      <div class="detail-bar"><div class="detail-bar-fill blue" id="bar2"></div></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-header">
-        <div class="detail-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <div><div class="detail-title">رقم الحظ</div><div class="detail-subtitle">رقم ${lastResult.luck1} × رقم ${lastResult.luck2}</div></div>
-      </div>
-      <div class="detail-bar"><div class="detail-bar-fill green" id="bar3"></div></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-header">
-        <div class="detail-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <div><div class="detail-title">توافق العناصر</div><div class="detail-subtitle">${lastResult.el1} × ${lastResult.el2}</div></div>
-      </div>
-      <div class="detail-bar"><div class="detail-bar-fill orange" id="bar4"></div></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-header">
-        <div class="detail-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div><div class="detail-title">ملخص</div></div>
-      </div>
-      <div class="detail-row"><span class="detail-row-label">برج ${lastResult.n1}</span><span class="zodiac-badge">${lastResult.z1.icon} ${lastResult.z1.name}</span></div>
-      <div class="detail-row"><span class="detail-row-label">برج ${lastResult.n2}</span><span class="zodiac-badge">${lastResult.z2.icon} ${lastResult.z2.name}</span></div>
-      <div class="detail-row"><span class="detail-row-label">رقم حظ ${lastResult.n1}</span><span class="detail-row-value">${lastResult.luck1}</span></div>
-      <div class="detail-row"><span class="detail-row-label">رقم حظ ${lastResult.n2}</span><span class="detail-row-value">${lastResult.luck2}</span></div>
-    </div>
-  `;
-
-  // أنيميشن الأشرطة
-  setTimeout(() => {
-    document.getElementById('bar1').style.width = lastResult.zodiacCompat + '%';
-    document.getElementById('bar2').style.width = lastResult.nameScore + '%';
-    document.getElementById('bar3').style.width = lastResult.luckScore + '%';
-    document.getElementById('bar4').style.width = lastResult.elemCompat + '%';
-  }, 300);
-
-  // القلوب المتساقطة
-  spawnHearts();
-}
-
-function spawnHearts() {
-  const container = document.getElementById('heartsContainer');
-  container.innerHTML = '';
-  const hearts = ['❤️','💕','💗','💖','💘','💞','🩷','🩵'];
-  for (let i = 0; i < 30; i++) {
-    const heart = document.createElement('div');
-    heart.className = 'falling-heart';
-    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-    heart.style.left = Math.random() * 100 + '%';
-    heart.style.fontSize = (16 + Math.random() * 20) + 'px';
-    heart.style.animationDuration = (3 + Math.random() * 4) + 's';
-    heart.style.animationDelay = Math.random() * 3 + 's';
-    container.appendChild(heart);
+  if(t==='meals'){
+    const days=keysAsc(store.meals).filter(k=>MEALS.some(([key])=>(store.meals[k][key]||{}).start)).reverse();
+    if(!days.length){B.innerHTML=sec('مخطط الوجبات',ICONS.meal,'<div class="empty-pg">لا توجد وجبات مسجلة بعد</div>');return}
+    B.innerHTML=sec('مخطط الوجبات اليومية',ICONS.meal,days.map(k=>{
+      const m=store.meals[k];
+      const segs=MEALS.map(([key,name,color])=>{const mm=m[key]||{};if(!mm.start)return '';
+        const sd=new Date(mm.start),sMin=sd.getHours()*60+sd.getMinutes();
+        const eMin=mm.end?(d=>d.getHours()*60+d.getMinutes())(new Date(mm.end)):sMin+30;
+        return `<div class="mseg" style="left:${sMin/1440*100}%;width:${Math.max(1.5,(eMin-sMin)/1440*100)}%;background:${color}">${name}</div>`}).join('');
+      const chips=MEALS.map(([key,name,color])=>{const mm=m[key]||{};if(!mm.start)return '';
+        return `<span class="mchip" style="background:${color}22;color:${color}">${name}: ${timeStr(mm.start)}${mm.end?'–'+timeStr(mm.end)+' ('+dur(Math.round((mm.end-mm.start)/60000))+')':' …'}</span>`}).join('');
+      return `<div class="pg-day"><b>${new Date(+k.slice(0,4),+k.slice(5,7)-1,+k.slice(8,10)).toLocaleDateString('ar',{weekday:'long'})}</b><span>${dLabel(k)}</span><div class="mtrack">${segs}</div><div class="mchips">${chips}</div></div>`}).join(''));
   }
-  setTimeout(() => container.innerHTML = '', 8000);
-}
-
-function backToMain() {
-  document.getElementById('resultOverlay').classList.remove('show');
-}
-
-async function shareResult() {
-  const text = `💕 نسبة الحب بين ${lastResult.n1} و ${lastResult.n2}: ${lastResult.finalScore}%\n${lastResult.z1.icon} ${lastResult.z1.name} × ${lastResult.z2.icon} ${lastResult.z2.name}`;
-  if (navigator.share) {
-    try { await navigator.share({ title: 'نسبة الحب', text }); } catch(e) {}
-  } else {
-    navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ'));
+  if(t==='prayer'){
+    const days=keysAsc(store.prayers).filter(k=>prayerCount(k)>0);
+    const items=days.map(k=>({x:dLabel(k),v:prayerCount(k)}));
+    const list=days.slice().reverse().map(k=>{const p=store.prayers[k];
+      return `<div class="pg-day"><b>${new Date(+k.slice(0,4),+k.slice(5,7)-1,+k.slice(8,10)).toLocaleDateString('ar',{weekday:'long'})} · ${prayerCount(k)}/5</b><div class="pdots">${PRAYERS.map(([key,name])=>`<div class="pdot${p[key]?' on':''}"><i>${p[key]?ICONS.check:''}</i>${name}</div>`).join('')}</div></div>`}).join('');
+    B.innerHTML=sec('مخطط الصلوات',ICONS.mosque,`<canvas id="cvP" class="pg-canvas" width="640" height="200"></canvas>`)+ (list?sec('تفاصيل الأيام',ICONS.mosque,list):'');
+    drawBars(document.getElementById('cvP'),items,{max:5,color:'#8b5cf6',fmt:v=>v+'/5',axis:v=>v.toFixed(0)});
+  }
+  if(t==='waste'){
+    const items=keysAsc(store.waste).filter(k=>wasteMin(k)>0).map(k=>({x:dLabel(k),v:wasteMin(k)}));
+    const mx=Math.max(60,Math.ceil((items.reduce((a,b)=>Math.max(a,b.v),0))/30)*30);
+    B.innerHTML=sec('مخطط الوقت الضائع',ICONS.hour,`<canvas id="cvW" class="pg-canvas" width="640" height="220"></canvas><div class="pg-sum"><div><b>${dur(items.reduce((a,b)=>a+b.v,0))}</b><span>إجمالي الضائع</span></div><div><b>${items.length}</b><span>أيام</span></div></div>`);
+    drawBars(document.getElementById('cvW'),items,{max:mx,color:'#dc3545',fmt:v=>dur(v),axis:v=>Math.round(v)+'د'});
   }
 }
+const page=document.getElementById('chartPage');
+document.getElementById('chartBtn').onclick=()=>{page.classList.add('open');renderPage(curTab)};
+document.getElementById('backBtn').onclick=()=>page.classList.remove('open');
+document.querySelectorAll('.ptab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('active'));b.classList.add('active');curTab=b.dataset.t;renderPage(curTab)});
 
-// === Theme ===
-function initTheme() {
-  const dark = localStorage.getItem('theme') === 'dark';
-  if (dark) { document.body.classList.add('dark'); document.getElementById('darkToggle').classList.add('active'); }
+/* السجل */
+function streak(){let s=0,d=new Date(Date.now()-RESET_H*3600000);const t=store.days[fmt(d)];if(!t||hours(t.math)+hours(t.arabic)===0)d=new Date(d.getTime()-86400000);for(;;){const e=store.days[fmt(d)];if(e&&hours(e.math)+hours(e.arabic)>0){s++;d=new Date(d.getTime()-86400000)}else break}return s}
+function renderSheet(){
+  const keys=Object.keys(store.days).filter(k=>{const d=store.days[k];return hours(d.math)+hours(d.arabic)>0}).sort().reverse();
+  let tot=0;keys.forEach(k=>{const d=store.days[k];tot+=hours(d.math)+hours(d.arabic)});
+  document.getElementById('stTotal').textContent=tot;document.getElementById('stDays').textContent=keys.length;document.getElementById('stStreak').textContent=streak();
+  const list=document.getElementById('daysList');
+  if(!keys.length){list.innerHTML='<div style="text-align:center;opacity:.5;padding:40px;color:#8aa093;font-weight:700">لا يوجد سجل بعد</div>';return}
+  list.innerHTML=keys.map(k=>{const d=store.days[k],mh=hours(d.math),ah=hours(d.arabic),t=mh+ah,sl=sleptHours(k),pc=prayerCount(k),wt=wasteMin(k),dt=new Date(+k.slice(0,4),+k.slice(5,7)-1,+k.slice(8,10)),today=k===curKey;
+    return `<div class="day-card${today?' today':''}"><div class="day-top"><div class="day-date"><b>${today?'اليوم — ':''}${dt.toLocaleDateString('ar',{weekday:'long'})}</b><span>${dt.toLocaleDateString('ar',{day:'numeric',month:'long'})}</span></div><div class="day-badges"><span class="badge m">${ICONS.calc}${mh}h</span><span class="badge a">${ICONS.book}${ah}h</span><span class="badge t">${ICONS.bolt}${t}h</span>${pc>0?`<span class="badge p">${ICONS.mosque}${pc}/5</span>`:''}${sl>0?`<span class="badge s">${ICONS.bed}${sl.toFixed(1)}h</span>`:''}${wt>0?`<span class="badge w">${ICONS.hour}${dur(wt)}</span>`:''}</div></div><div class="day-bar"><i style="width:${t/8*100}%"></i></div></div>`}).join('');
 }
-function toggleDark() {
-  document.body.classList.toggle('dark');
-  const isDark = document.body.classList.contains('dark');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  document.getElementById('darkToggle').classList.toggle('active', isDark);
-}
-function openSettings() { document.getElementById('modalOverlay').classList.add('show'); document.getElementById('modalSheet').classList.add('show'); document.body.style.overflow='hidden'; }
-function closeSettings() { document.getElementById('modalOverlay').classList.remove('show'); document.getElementById('modalSheet').classList.remove('show'); document.body.style.overflow=''; }
-function showToast(msg) { const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
-function shakeEl(id) { const el=document.getElementById(id); el.classList.add('shake'); setTimeout(()=>el.classList.remove('shake'),500); }
+const sheet=document.getElementById('sheet'),ov=document.getElementById('overlay');
+function openSheet(){renderSheet();sheet.classList.add('open');ov.classList.add('show')}
+function closeSheet(){sheet.classList.remove('open');ov.classList.remove('show')}
+document.getElementById('dialBtn').onclick=openSheet;document.getElementById('logBtn').onclick=openSheet;document.getElementById('closeSheet').onclick=closeSheet;ov.onclick=closeSheet;
+document.getElementById('resetBtn').onclick=()=>{store.days[curKey]=empty();store.sleep[curKey]={};store.meals[curKey]={};store.prayers[curKey]={};store.waste[curKey]={total:0,run:null};save();render();toast('تم تصفير اليوم كاملاً',ICONS.clock)};
 
-initTheme();
+function toast(m,i,warn){const t=document.getElementById('toast');t.className='toast'+(warn?' warn':'');t.innerHTML=i+`<span>${m}</span>`;t.classList.add('show');clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove('show'),2800)}
+
+setInterval(()=>{const tk=dayKey();if(tk!==curKey){curKey=tk;celebrated=null;render();if(sheet.classList.contains('open'))renderSheet();toast('🌅 يوم جديد (2:00ص) — تم التصفير',ICONS.star)}else{renderSleep();renderNow();renderWaste()}},5000);
+setInterval(renderWaste,1000);
+render();
+})();
 </script>
-
 </body>
 </html>
