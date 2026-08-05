@@ -52,7 +52,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Ta
 .dial-num{font-size:33px;font-weight:900;line-height:1;color:var(--g1)}
 .dial-label{font-size:11px;color:var(--sub);font-weight:700;margin-top:3px}
 
-/* الجدول اليومي - نظام 50/5 */
 .timeline{width:100%;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--brd);border-radius:20px;padding:13px 14px;margin-top:13px;box-shadow:0 8px 24px rgba(23,84,58,.08)}
 .tl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .tl-head b{font-size:13px;font-weight:900}
@@ -306,7 +305,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Ta
     </div>
     <button class="sm-btn chart-open" id="chartBtn"><svg viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></svg> فتح المخططات الكاملة</button>
   </div>
-  <div class="reset-note"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> تصفير تلقائي كل يوم الساعة 2:00 صباحاً</div>
+  <div class="reset-note"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> تصفير الدراسة تلقائياً 2:00ص · النوم لا يتوقف إلا بزر "صحيت"</div>
 </div>
 
 <div class="page" id="chartPage">
@@ -334,10 +333,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Ta
 
 <script>
 (function(){
-const KEY='study_final_v3',NAMES=['الأولى','الثانية','الثالثة','الرابعة'],REQ_STUDY=8,RESET_H=2;
+const KEY='study_final_v4',NAMES=['الأولى','الثانية','الثالثة','الرابعة'],REQ_STUDY=8,RESET_H=2;
 const PRAYERS=[['fajr','الفجر'],['dhuhr','الظهر'],['asr','العصر'],['maghrib','المغرب'],['isha','العشاء']];
 const MEALS=[['breakfast','الفطور','#c99a1f'],['lunch','الغداء','#1f9d6a'],['dinner','العشاء','#8b5cf6']];
-/* الجدول الكامل بنظام 50/5 */
 const SCHEDULE=[
  {s:390,e:420,type:'prep',name:'استيقاظ وتجهيز',desc:'بداية اليوم',c:'#ff8a5c'},
  {s:420,e:470,type:'study',name:'الجلسة الأولى',desc:'دراسة 50د',c:'#1f9d6a'},
@@ -368,12 +366,15 @@ const SCHEDULE=[
 const GROUPS=[{at:0,l:'1 · الصباح والتهيؤ'},{at:1,l:'2 · الفترة الصباحية (50/5)'},{at:12,l:'3 · فترة الغداء'},{at:13,l:'4 · بعد الغداء'},{at:19,l:'5 · الاستراحة المسائية'},{at:20,l:'6 · الفترة الليلية'}];
 const ICONS={clock:'<svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>',check:'<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',calc:'<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>',book:'<svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>',bolt:'<svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>',star:'<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>',warn:'<svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>',bed:'<svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>',meal:'<svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>',mosque:'<svg viewBox="0 0 24 24"><path d="M12 2c-.8 2.5-4 3.8-4 6.5h8C16 5.8 12.8 4.5 12 2zM4 22v-8h2V9l2 2v3h8v-3l2-2v5h2v8H4zm6 0h4v-3c0-1.1-.9-2-2-2s-2 .9-2 2v3z"/></svg>',hour:'<svg viewBox="0 0 24 24"><path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6z"/></svg>'};
 const C=2*Math.PI*85;
-let store=JSON.parse(localStorage.getItem(KEY))||{days:{},sleep:{},meals:{},prayers:{},waste:{}};
+let store=JSON.parse(localStorage.getItem(KEY))||{days:{},sleep:{},meals:{},prayers:{},waste:{},curSleep:null};
 ['sleep','meals','prayers','waste'].forEach(k=>{if(!store[k])store[k]={}});
+/* ترحيل أي جلسة نوم قديمة غير مكتملة إلى curSleep */
+Object.keys(store.sleep).forEach(k=>{const s=store.sleep[k];if(s&&s.sleepAt&&!s.wakeAt){store.curSleep={sleepAt:s.sleepAt,wakeAt:null};delete store.sleep[k];}});
 let curKey=dayKey(),celebrated=null,tTimer,curTab='sleep';
 
 function fmt(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function dayKey(){return fmt(new Date(Date.now()-RESET_H*3600000))}
+function dayKeyAt(ts){return fmt(new Date(ts-RESET_H*3600000))}
 function empty(){return{math:[0,0,0,0],arabic:[0,0,0,0]}}
 function hours(a){return a?a.filter(Boolean).length:0}
 function getDay(k){return store.days[k]||empty()}
@@ -382,8 +383,16 @@ function save(){localStorage.setItem(KEY,JSON.stringify(store))}
 function timeStr(ts){return ts?new Date(ts).toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'}):'—'}
 function studyDone(){const d=getDay(curKey);return hours(d.math)+hours(d.arabic)}
 function canSleep(){return studyDone()>=REQ_STUDY}
-function isSleeping(){const s=store.sleep[curKey];return !!(s&&s.sleepAt&&!s.wakeAt)}
-function sleepMin(k){const s=store.sleep[k];if(!s||!s.sleepAt)return 0;const end=s.wakeAt||Date.now();return Math.max(0,Math.round((end-s.sleepAt)/60000))}
+/* النوم جلسة مستقلة لا تتأثر بتغيير اليوم */
+function isSleeping(){const s=store.curSleep;return !!(s&&s.sleepAt&&!s.wakeAt)}
+function sleepMinOf(s){return (s&&s.sleepAt)?Math.max(0,Math.round(((s.wakeAt||Date.now())-s.sleepAt)/60000)):0}
+function sleepMin(k){return sleepMinOf(store.sleep[k])}
+function displaySleep(){
+  if(isSleeping())return store.curSleep;
+  if(store.sleep[curKey])return store.sleep[curKey];
+  const ks=keysAsc(store.sleep);
+  return ks.length?store.sleep[ks[ks.length-1]]:{};
+}
 function nowMin(){const d=new Date();return d.getHours()*60+d.getMinutes()}
 function dur(m){const h=Math.floor(m/60),mm=m%60;return h&&mm?h+'س و'+mm+'د':h?h+' ساعات':mm+' دقيقة'}
 function hmm(m){return Math.floor(m/60)+':'+String(m%60).padStart(2,'0')}
@@ -395,7 +404,6 @@ function wasteMin(k){const w=store.waste[k];if(!w)return 0;let t=w.total||0;if(w
 function dLabel(k){const d=new Date(+k.slice(0,4),+k.slice(5,7)-1,+k.slice(8,10));return d.getDate()+'/'+(d.getMonth()+1)}
 function keysAsc(o){return Object.keys(o).sort()}
 
-/* بناء الجدول مع المجموعات */
 (function(){const L=document.getElementById('tlList');
  SCHEDULE.forEach((s,i)=>{
   const g=GROUPS.find(x=>x.at===i);
@@ -434,34 +442,41 @@ function toggle(s,i){const d=setDay(curKey);d[s][i]=d[s][i]?0:1;save();if(naviga
 function togglePrayer(key){const p=store.prayers[curKey]||(store.prayers[curKey]={});p[key]=!p[key];save();
  if(p[key]&&prayerCount(curKey)===5)toast('🕌 أكملت صلوات اليوم',ICONS.mosque);render()}
 
+/* النوم: جلسة مستمرة لا يصفرها تغيير اليوم */
 document.getElementById('sleepBtn').onclick=()=>{
   if(!canSleep()){toast('⛔ ممنوع! أكمل 8 ساعات دراسة أولاً',ICONS.warn,true);return}
   if(isSleeping())return;
-  const s=store.sleep[curKey]||(store.sleep[curKey]={});s.sleepAt=Date.now();s.wakeAt=null;save();render();toast('💤 تم تسجيل النوم',ICONS.bed)};
-document.getElementById('wakeBtn').onclick=()=>{const s=store.sleep[curKey];if(!s||!s.sleepAt)return;s.wakeAt=Date.now();save();render();toast('☀️ صحيت! نمت '+dur(sleepMin(curKey)),ICONS.star)};
+  store.curSleep={sleepAt:Date.now(),wakeAt:null};save();render();toast('💤 تم تسجيل النوم — يشتغل حتى تضغط صحيت',ICONS.bed)};
+document.getElementById('wakeBtn').onclick=()=>{
+  const s=store.curSleep;if(!s||!s.sleepAt)return;
+  s.wakeAt=Date.now();
+  const k=dayKeyAt(s.sleepAt);
+  store.sleep[k]={sleepAt:s.sleepAt,wakeAt:s.wakeAt};
+  store.curSleep=null;save();render();
+  toast('☀️ صحيت! نمت '+dur(sleepMinOf(s)),ICONS.star)};
 
 function renderSleep(){
-  const s=store.sleep[curKey]||{},sleeping=isSleeping(),done=studyDone(),ok=canSleep();
+  const sleeping=isSleeping(),done=studyDone(),ok=canSleep(),ds=displaySleep();
   const mon=document.getElementById('sleepMon'),btn=document.getElementById('sleepBtn'),wb=document.getElementById('wakeBtn');
   mon.classList.toggle('locked',!ok&&!sleeping);mon.classList.toggle('ready',ok&&!sleeping);mon.classList.toggle('asleep',sleeping);
   document.getElementById('smBar').style.width=Math.min(100,done/REQ_STUDY*100)+'%';
   btn.disabled=!ok||sleeping;wb.style.display=sleeping?'flex':'none';btn.style.display=sleeping?'none':'flex';
   const st=document.getElementById('smStatus'),tt=document.getElementById('smTitle'),sb=document.getElementById('smSub');
-  if(sleeping){st.textContent='💤 نائم';tt.textContent='أنت نائم الآن';sb.textContent='النوم يحسب بالدقائق لحظياً'}
+  if(sleeping){st.textContent='💤 نائم';tt.textContent='أنت نائم الآن';sb.textContent='النوم مستمر — لا يتوقف إلا بزر صحيت'}
   else if(ok){st.textContent='✓ متاح';tt.textContent='أكملت الدراسة!';sb.textContent='درست '+done+' ساعات — تقدر تنام'}
   else{st.textContent='⛔ مقفل';tt.textContent='النوم مقفل';sb.textContent='باقي '+(REQ_STUDY-done)+' ساعات دراسة لتنام'}
-  document.getElementById('slSleepT').innerHTML=timeStr(s.sleepAt)+'<small>وقت النوم</small>';
-  document.getElementById('slWakeT').innerHTML=timeStr(s.wakeAt)+'<small>الاستيقاظ</small>';
-  document.getElementById('slStatus').textContent=sleeping?'نائم · '+dur(sleepMin(curKey)):'10:30م – 6:30ص';
-  if(!sleeping)document.getElementById('slDurT').innerHTML=(s.sleepAt&&s.wakeAt?dur(sleepMin(curKey)):'—')+'<small>مدة النوم</small>'}
-function liveSleep(){if(isSleeping())document.getElementById('slDurT').innerHTML=dur(sleepMin(curKey))+'<small>مدة النوم</small>'}
+  document.getElementById('slSleepT').innerHTML=timeStr(ds.sleepAt)+'<small>وقت النوم</small>';
+  document.getElementById('slWakeT').innerHTML=(ds.wakeAt?timeStr(ds.wakeAt):'—')+'<small>الاستيقاظ</small>';
+  document.getElementById('slStatus').textContent=sleeping?'نائم · '+dur(sleepMinOf(ds)):'10:30م – 6:30ص';
+  document.getElementById('slDurT').innerHTML=(ds.sleepAt?dur(sleepMinOf(ds)):'—')+'<small>مدة النوم</small>'}
+function liveSleep(){if(isSleeping()){document.getElementById('slDurT').innerHTML=dur(sleepMinOf(store.curSleep))+'<small>مدة النوم</small>';document.getElementById('slStatus').textContent='نائم · '+dur(sleepMinOf(store.curSleep))}}
 
 function renderNow(){
   const m=nowMin(),seg=activeSeg(),dot=document.getElementById('nowDot');
   document.getElementById('nowClock').textContent=new Date().toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'});
   document.getElementById('nowDate').textContent=new Date().toLocaleDateString('ar',{weekday:'long',day:'numeric',month:'long'});
   const end=seg.e>seg.s?seg.e:seg.e+1440,cur=m>=seg.s?m:m+1440,rem=end-cur;
-  if(isSleeping()||seg.type==='sleep'){dot.className='now-dot sleep';document.getElementById('nowTitle').textContent='وقت النوم';document.getElementById('nowSub').textContent='الاستيقاظ 6:30ص · باقي '+dur(rem)}
+  if(isSleeping()||seg.type==='sleep'){dot.className='now-dot sleep';document.getElementById('nowTitle').textContent='وقت النوم';document.getElementById('nowSub').textContent=isSleeping()?('نائم منذ '+dur(sleepMinOf(store.curSleep))):('الاستيقاظ 6:30ص · باقي '+dur(rem))}
   else{dot.className='now-dot '+(seg.type==='study'?'study':(seg.type==='free'?'free':'break'));
     document.getElementById('nowTitle').textContent=seg.name;document.getElementById('nowSub').textContent='ينتهي خلال '+dur(rem)}
   document.getElementById('tlChip').textContent=seg.name+' · باقي '+dur(rem);
@@ -536,11 +551,11 @@ const sheet=document.getElementById('sheet'),ov=document.getElementById('overlay
 function openSheet(){renderSheet();sheet.classList.add('open');ov.classList.add('show')}
 function closeSheet(){sheet.classList.remove('open');ov.classList.remove('show')}
 document.getElementById('dialBtn').onclick=openSheet;document.getElementById('logBtn').onclick=openSheet;document.getElementById('closeSheet').onclick=closeSheet;ov.onclick=closeSheet;
-document.getElementById('resetBtn').onclick=()=>{store.days[curKey]=empty();store.sleep[curKey]={};store.meals[curKey]={};store.prayers[curKey]={};store.waste[curKey]={total:0,run:null};save();render();toast('تم تصفير اليوم كاملاً',ICONS.clock)};
+document.getElementById('resetBtn').onclick=()=>{store.days[curKey]=empty();store.meals[curKey]={};store.prayers[curKey]={};store.waste[curKey]={total:0,run:null};save();render();toast('تم تصفير اليوم (النوم ما تأثر)',ICONS.clock)};
 
 function toast(m,i,warn){const t=document.getElementById('toast');t.className='toast'+(warn?' warn':'');t.innerHTML=i+`<span>${m}</span>`;t.classList.add('show');clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove('show'),2800)}
 
-setInterval(()=>{const tk=dayKey();if(tk!==curKey){curKey=tk;celebrated=null;render();if(sheet.classList.contains('open'))renderSheet();toast('🌅 يوم جديد (2:00ص) — تم التصفير',ICONS.star)}else{renderSleep();renderNow();renderWaste()}},5000);
+setInterval(()=>{const tk=dayKey();if(tk!==curKey){curKey=tk;celebrated=null;render();if(sheet.classList.contains('open'))renderSheet();toast('🌅 يوم جديد (2:00ص) — تصفير الدراسة فقط',ICONS.star)}else{renderSleep();renderNow();renderWaste()}},5000);
 setInterval(()=>{renderWaste();liveSleep()},1000);
 render();
 })();
